@@ -6,17 +6,13 @@ const css = {
     component: { position: 'absolute', backgroundColor: 'red', width: '60px', height: '60px' }
 }
 
-export default class Transition extends Component {
-    constructor () {
-        super()
-        this.state = { toggle: false }
-    }
-    
+export default class Transition extends Component {    
     render () {
-        const end = this.state.toggle ? 740 : 0
+        const end = this.props.toggle ? 740 : 0
+        const preset = this.props.preset
         return (
-            <div onClick={() => this.setState({toggle: !this.state.toggle})}>
-                <Motion defaultStyle={{x: 0}} style={{x: spring(end)}}>
+            <div>
+                <Motion defaultStyle={{x: 0}} style={{x: spring(end, preset)}}>
                     { value =>
                         <div style={css.container}>
                         
