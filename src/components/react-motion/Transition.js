@@ -2,13 +2,13 @@ import React, { Component } from 'react'
 import { Motion, spring } from 'react-motion' 
 
 const css = {
-    container: { position: 'relative', backgroundColor: 'pink', width: '800px', height: '60px', cursor: 'pointer' },
-    component: { position: 'absolute', backgroundColor: 'red', width: '60px', height: '60px' }
+    container: { backgroundColor: 'pink', width: '100%', height: '60px', cursor: 'pointer' },
+    component: { backgroundColor: 'red', width: '10%', height: '60px' }
 }
 
 export default class Transition extends Component {    
     render () {
-        const end = this.props.toggle ? 740 : 0
+        const end = this.props.toggle ? 100 : 10
         const preset = this.props.preset
         return (
             <div>
@@ -16,9 +16,7 @@ export default class Transition extends Component {
                     { value =>
                         <div style={css.container}>
                         
-                            <div style={{...css.component, left: value.x + 'px'}}>
-
-                            </div>
+                            <div style={{...css.component, marginLeft: 'calc(' + value.x + '% - 10%)'}}></div>
                         
                         </div>
                     }
