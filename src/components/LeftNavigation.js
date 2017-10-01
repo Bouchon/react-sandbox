@@ -19,6 +19,11 @@ export default class LeftNavigation extends Component {
                             <ListItemText primary='Home' />
                         </ListItem>
                     </Link>
+                    <Link to='/projects'>
+                        <ListItem button>
+                            <ListItemText primary='Projects' />
+                        </ListItem>
+                    </Link>
                     <Link to='/react-motion'>
                         <ListItem button>
                             <ListItemText primary='react-motion' />

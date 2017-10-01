@@ -8,6 +8,10 @@ const DEFAULT_STATE = {
     login: {
         state: 'logged-out',
         response: {}
+    },
+    projects: {
+        '0': { id: '0', name: 'Premier projet', description: 'Description du projet' },
+        '1': { id: '1', name: 'Deuxième projet', description: 'Description du projet' }
     }
 }
 
