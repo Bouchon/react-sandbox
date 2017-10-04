@@ -1,36 +1,36 @@
-import { ADD, UPDATE, DELETE } from '../action-creators/projects'
+import { ADD, UPDATE, DELETE } from '../action-creators/tasks'
 
-export default function projects (state = {}, action) {
+export default function tasks (state = {}, action) {
     switch (action.type) {
         case ADD: {
-            const { name, description } = action.payload
+            const { projectId, name, description } = action.payload
             let max = 0
             for (var i=0; i<Object.values(state).length; i++) {
                 const id = Object.values(state)[i].id
                 max = Math.max(max, id)
             }
             const newId = max + 1
-            return { ...state, [newId]: { id: newId, name, description} }
+            return { ...state, [newId]: { id: newId, projectId, name, description} }
         }
   
       case UPDATE: {
-        const { id, name, description } = action.payload
-        const newProject = { id, name, description }
+        const { id, projectId, name, description } = action.payload
+        const newTask = { id, projectId, name, description }
         if (state[id] !== undefined) {
             let result = { ...state }
-            result[id] = newProject
+            result[id] = newTask
             return result
         } else {
-            throw new Error('Project not found (id=' + id + ')')
+            throw new Error('Task not found (id=' + id + ')')
         }
       }
   
       case DELETE: {
           let result = { }
           for (var i=0; i<Object.values(state).length; i++) {
-              const project = Object.values(state)[i]
-              if (project.id !== action.payload.id) {
-                  result[project.id] = project
+              const task = Object.values(state)[i]
+              if (task.id !== action.payload.id) {
+                  result[task.id] = task
               }
           }
           return result

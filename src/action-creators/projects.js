@@ -1,6 +1,6 @@
 export const ADD = '@@PROJECT_ADD'
 export const UPDATE = '@@PROJECT_UPDATE'
-export const REMOVE = '@@PROJECT_REMOVE'
+export const DELETE = '@@PROJECT_DELETE'
 
 export function addProject (name, description) {
     return {
@@ -16,9 +16,9 @@ export function updateProject (id, name, description) {
     }
 }
 
-export function removeProject (id) {
+export function deleteProject (id) {
     return {
-        type: REMOVE,
+        type: DELETE,
         payload: { id }
     }
 }
