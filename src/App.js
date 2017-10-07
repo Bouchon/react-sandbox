@@ -27,6 +27,7 @@ class App extends Component {
                         <Route exact path='/project/add' component={ProjectAddOrUpdateScreen} />
                         <Route exact path='/project/edit/:id' component={ProjectAddOrUpdateScreen} />
                         <Route exact path='/project/dashboard/:id' component={ProjectDashboardScreen} />
+                        
                         <Route exact path='/react-motion' component={ReactMotionScreen} />
                     </div>
                 </Layout>

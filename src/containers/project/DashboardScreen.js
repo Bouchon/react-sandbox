@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { getStoredState } from 'redux-persist'
 
 import Grid from 'material-ui/Grid'
 import Typography from 'material-ui/Typography'
@@ -9,17 +10,24 @@ import TaskList from '../../components/task/List'
 class DashboardScreen extends Component {
     constructor () {
         super()        
-        this.state = { project: null, tasks: null }
+        this.state = {
+            project: undefined, 
+            tasks: undefined 
+        }
     }
 
-    componentWillMount () {
-        const projectId = this.props.match.params.id
-        const tasks = Object.values(this.props.tasks).filter(task => task !== null)
+    componentWillReceiveProps (nextProps) {
+        if (this.state.project === undefined) {
+            const { projects } = nextProps
+            const projectId = this.props.match.params.id
+            this.setState({ project: projects[projectId] })
+        }
 
-        this.setState({ 
-            project: this.props.projects[projectId],
-            tasks: tasks
-        })
+        if (this.state.tasks === undefined) {
+            const { tasks } = nextProps
+            const projectId = parseInt(this.props.match.params.id)
+            this.setState({ tasks: Object.values(tasks).filter(task => task.projectId === projectId) })
+        }
     }
 
     render () {
@@ -42,5 +50,7 @@ class DashboardScreen extends Component {
     }
 }
 
-const mapStateToProps = ({ projects, tasks }) => ({ projects, tasks })
+const mapStateToProps = ({ projects, tasks }) => {
+    return { projects, tasks }
+}
 export default connect(mapStateToProps)(DashboardScreen)

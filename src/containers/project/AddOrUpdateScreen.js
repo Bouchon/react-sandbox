@@ -76,5 +76,12 @@ class AddOrUpdateScreen extends Component {
 }
 
 const mapStateToProps = ({ projects }) => ({ projects })
+const mapDispatchToProps = (dispatch) => {
+    return {
+      onTodoClick: id => {
+        dispatch(toggleTodo(id))
+      }
+    }
+  }
 export default connect(mapStateToProps, { addProject, updateProject })(AddOrUpdateScreen)
 

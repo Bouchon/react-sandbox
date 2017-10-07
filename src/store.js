@@ -14,7 +14,7 @@ const DEFAULT_STATE = {
         '1': { id: 1, name: 'Deuxième projet', description: 'Description du projet' }
     },
     tasks: {
-        '0': { id: 0, name: 'Première tâche', description: 'Description de la tâche', projectId: 0 }
+        '0': { id: 0, projectId: 0, name: 'Première tâche', description: 'Description de la tâche' }
     }
 }
 
@@ -32,7 +32,7 @@ const store = createStore(
 persistStore(
     store,
     { 
-        whitelist: ['login', 'projects'],
+        whitelist: ['login', 'projects', 'tasks'],
         storage: localForage
     }
 )
