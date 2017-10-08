@@ -1,6 +1,6 @@
 import { compose, applyMiddleware, createStore } from 'redux'
 import localForage from 'localforage'
-import { persistStore, autoRehydrate } from 'redux-persist'
+import { getStoredState, persistStore, autoRehydrate, createPersistor } from 'redux-persist'
 
 import rootReducer from './reducers/root'
 
@@ -18,8 +18,34 @@ const DEFAULT_STATE = {
     }
 }
 
-const enhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+export default function configureStore() {
+    return new Promise((resolve, reject) => {
+        try {
+            const enhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+            const store = createStore(
+                rootReducer, 
+                undefined,
+                enhancer(applyMiddleware(), autoRehydrate()))
 
+            persistStore(
+                store, 
+                {
+                    whitelist: ['login', 'projects', 'tasks'], 
+                    storage: localForage
+                },
+                () => resolve(store))
+        } catch (ex) {
+            reject(ex)
+        }
+    })
+}
+
+/*const persistConfig = {
+    whitelist: ['login', 'projects', 'tasks'], 
+    storage: localForage
+}
+
+const enhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 const store = createStore(
     rootReducer,
     DEFAULT_STATE,
@@ -37,4 +63,4 @@ persistStore(
     }
 )
 
-export default store
+export default store*/

@@ -2,12 +2,14 @@ import React from 'react'
 import { AppContainer } from 'react-hot-loader'
 import { render } from 'react-dom'
 
+import configureStore from './store'
 import App from './App'
 
-function renderApp (RootComponent) {
+async function renderApp (RootComponent) {
+    const store = await configureStore()
     render(
         <AppContainer>
-            <RootComponent />
+            <RootComponent store={store} />
         </AppContainer>,
         document.getElementById('app')
     )

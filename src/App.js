@@ -2,8 +2,6 @@ import React, { Component } from 'react'
 import { Provider } from 'react-redux'
 import { Route } from 'react-router-dom'
 
-import store from './store'
-
 import Layout from './containers/Layout'
 import LeftNavigation from './components/LeftNavigation'
 import ApplicationBar from './components/ApplicationBar'
@@ -17,7 +15,7 @@ import ProjectDashboardScreen from './containers/project/DashboardScreen'
 class App extends Component {
     render () {
         return (
-            <Provider store={store}>
+            <Provider store={this.props.store}>
                 <Layout 
                     appBar={<ApplicationBar title='React sandbox' />} 
                     leftNav={<LeftNavigation type='permanent' />}>
