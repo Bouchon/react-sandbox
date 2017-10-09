@@ -21,9 +21,9 @@ class ListScreen extends Component {
         if (this.state.onAdd === true) {
             return <Redirect to='/project/add' />
         } else if (this.state.onEdit === true) {
-            return <Redirect to={'/project/edit/' + this.state.projectId} />
+            return <Redirect to={'/project/' + this.state.projectId + '/edit/' } />
         } else if (this.state.onDashboard === true) {
-            return <Redirect to={'/project/dashboard/' + this.state.projectId} />
+            return <Redirect to={'/project/' + this.state.projectId + '/dashboard/'} />
         }
 
         return <List 

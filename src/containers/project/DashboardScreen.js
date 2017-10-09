@@ -1,40 +1,31 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { getStoredState } from 'redux-persist'
+import { Redirect } from 'react-router'
 
 import Grid from 'material-ui/Grid'
 import Typography from 'material-ui/Typography'
 
-import TaskList from '../../components/task/List'
+import Tile from '../../components/dashboard/Tile'
 
 class DashboardScreen extends Component {
     constructor () {
         super()        
         this.state = {
-            project: undefined, 
-            tasks: undefined 
-        }
-    }
-
-    componentWillReceiveProps (nextProps) {
-        if (this.state.project === undefined) {
-            const { projects } = nextProps
-            const projectId = this.props.match.params.id
-            this.setState({ project: projects[projectId] })
-        }
-
-        if (this.state.tasks === undefined) {
-            const { tasks } = nextProps
-            const projectId = parseInt(this.props.match.params.id)
-            this.setState({ tasks: Object.values(tasks).filter(task => task.projectId === projectId) })
+            onViewTasks: false
         }
     }
 
     render () {
-        const { project } = this.state
+        const projectId = parseInt(this.props.match.params.id)
+        const project = this.props.projects[projectId]
+        const tasks = Object.values(this.props.tasks).filter(t => t.projectId === projectId)
 
         if (project === undefined) 
             return <Typography color='accent' align='center' type='display3'>PROJECT NOT FOUND</Typography>
+
+        if (this.state.onViewTasks === true) {
+            return <Redirect to={'/project/' + project.id + '/task/list'} />
+        }
  
         return (
             <Grid container>
@@ -42,15 +33,18 @@ class DashboardScreen extends Component {
                     <Typography type='display2'>Dashboard</Typography>
                     <Typography type='headline'>{ project.name }</Typography>
                 </Grid>
-                <Grid item xs={12} md={6} lg={3}>    
-                    <TaskList tasks={ this.state.tasks } />
+                <Grid item container>
+                    <Grid item>
+                        <Tile title='tasks' value={ tasks.length } onClick={ () => this.setState({ onViewTasks: true }) } />
+                    </Grid>
+                    <Grid item>
+                        <Tile title='conversations' value='0' />
+                    </Grid>
                 </Grid>
             </Grid>
         )
     }
 }
 
-const mapStateToProps = ({ projects, tasks }) => {
-    return { projects, tasks }
-}
+const mapStateToProps = ({ projects, tasks }) => ({ projects, tasks })
 export default connect(mapStateToProps)(DashboardScreen)
