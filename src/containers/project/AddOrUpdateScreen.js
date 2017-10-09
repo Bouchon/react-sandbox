@@ -4,7 +4,7 @@ import autobind from 'autobind-decorator'
 import { Redirect } from 'react-router'
 
 import Typography from 'material-ui/Typography'
-import TextField from 'material-ui/Textfield'
+import TextField from 'material-ui/TextField'
 import Button from 'material-ui/Button'
 
 import { addProject, updateProject } from '../../action-creators/projects'

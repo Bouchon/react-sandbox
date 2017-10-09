@@ -3,22 +3,24 @@ import { ADD, UPDATE, DELETE } from '../action-creators/tasks'
 export default function tasks (state = {}, action) {
     switch (action.type) {
         case ADD: {
-            const { projectId, name, description } = action.payload
+            const { task } = action.payload
+            task.name = task.name === undefined ? '' : task.name
+            task.description = task.description === undefined ? '' : task.description
+
             let max = 0
             for (var i=0; i<Object.values(state).length; i++) {
                 const id = Object.values(state)[i].id
                 max = Math.max(max, id)
             }
             const newId = max + 1
-            return { ...state, [newId]: { id: newId, projectId, name, description} }
+            return { ...state, [newId]: { ...task, id: newId } }
         }
   
       case UPDATE: {
-        const { id, projectId, name, description } = action.payload
-        const newTask = { id, projectId, name, description }
-        if (state[id] !== undefined) {
+        const { task } = action.payload
+        if (state[task.id] !== undefined) {
             let result = { ...state }
-            result[id] = newTask
+            result[task.id] = task
             return result
         } else {
             throw new Error('Task not found (id=' + id + ')')

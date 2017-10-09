@@ -2,17 +2,17 @@ export const ADD = '@@TASK_ADD'
 export const UPDATE = '@@TASK_UPDATE'
 export const DELETE = '@@TASK_DELETE'
 
-export function addTask (projectId, name, description) {
+export function addTask (task) {
     return {
         type: ADD,
-        payload: { projectId, name, description }
+        payload: { task }
     }
 }
 
-export function updateTask (id, projectId, name, description) {
+export function updateTask (task) {
     return {
         type: UPDATE,
-        payload: { id, projectId, name, description }
+        payload: { task }
     }
 }
 

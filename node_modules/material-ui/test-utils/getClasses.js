@@ -18,7 +18,7 @@ var _ns = require('react-jss/lib/ns');
 
 var ns = _interopRequireWildcard(_ns);
 
-var _jss = require('react-jss/lib/jss');
+var _jss = require('jss');
 
 var _createShallow = require('./createShallow');
 
