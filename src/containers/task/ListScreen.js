@@ -5,6 +5,7 @@ import { Redirect } from 'react-router'
 import Typography from 'material-ui/Typography'
 import Button from 'material-ui/Button'
 import AddIcon from 'material-ui-icons/Add'
+import ArrowBackIcon from 'material-ui-icons/ArrowBack'
 
 import ListItem from '../../components/task/ListItem'
 import { addTask, updateTask, deleteTask } from '../../action-creators/tasks'
@@ -26,25 +27,31 @@ class ListScreen extends Component {
             return <Redirect to={ '/project/' + projectId + '/dashboard' } />
         }
 
-        const project = this.props.projects[projectId]
-        const tasks = Object.values(this.props.tasks).filter(t => t.projectId === projectId)
+        const { projects, tasks, addTask, updateTask, deleteTask } = this.props
+        const project = projects[projectId]
+        const projectTasks = Object.values(tasks).filter(t => t.projectId === projectId)
 
         return (
             <div>
+                <Button raised color='accent' onClick={() => this.setState({ goToProject: true }) }>
+                    <ArrowBackIcon />
+                    { project.name }
+                </Button>
                 <Typography type='display2'>Tasks</Typography>
-                <Button onClick={() => this.setState({ goToProject: true }) }>{ project.name }</Button>
                 {
-                    tasks.map(task => (
-                        <ListItem 
-                            key={task.id} 
-                            task={task} 
-                            onUpdate={ (id, name, description) => this.props.updateTask({ id, projectId, name, description })  }
-                            onDelete={ (id) => this.props.deleteTask(id) } />
-                    ))
+                    projectTasks.length === 0 ? 
+                        <Typography type='title' gutterBottom><i>No tasks found for this project, click the "+" button to create a new task.</i></Typography> :
+                        projectTasks.map(task => (
+                            <ListItem 
+                                key={task.id} 
+                                task={task} 
+                                onUpdate={ task => updateTask(task)  }
+                                onDelete={ id => deleteTask(id) } />
+                        ))
                 }
 
                 <Button fab 
-                    onClick={ () => this.props.addTask({ projectId: project.id }) }
+                    onClick={ () => addTask({ projectId: project.id }) }
                     color="primary" 
                     aria-label="add" 
                     style={css.addButton}>

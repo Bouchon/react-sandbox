@@ -16,7 +16,7 @@ const css = {
 
 export default class ListItem extends Component {  
     render () {
-        const { task } = this.props
+        const { task, onUpdate, onDelete } = this.props
         return (
             <div style={ css.item }>
                 <Typography style={ css.index } type='title'>{ task.id }</Typography>
@@ -24,13 +24,13 @@ export default class ListItem extends Component {
                 <TextField
                     label='Name'
                     value={ task.name } 
-                    onChange={ event => this.props.onUpdate(task.id, event.target.value, task.description )} />
+                    onChange={ event => onUpdate({...task, name: event.target.value})} />
 
-                <DatePicker label='Start date' />
-                <TimePicker label='Start date' />
+                <DatePicker label='Start date' onChange={ date => onUpdate({...task, startDate: date}) } />
+                <DatePicker label='End date' onChange={ date => onUpdate({...task, endDate: date}) } />
 
                 <IconButton 
-                    onClick={ () => this.props.onDelete(task.id) }>
+                    onClick={ () => onDelete(task.id) }>
                     <DeleteIcon />
                 </IconButton>
             </div>
