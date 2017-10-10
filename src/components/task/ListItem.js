@@ -26,8 +26,8 @@ export default class ListItem extends Component {
                     value={ task.name } 
                     onChange={ event => onUpdate({...task, name: event.target.value})} />
 
-                <DatePicker label='Start date' onChange={ date => onUpdate({...task, startDate: date}) } />
-                <DatePicker label='End date' onChange={ date => onUpdate({...task, endDate: date}) } />
+                <DatePicker value={ task.startDate } label='Start date' onChange={ date => onUpdate({...task, startDate: date}) } />
+                <DatePicker value={ task.endDate } label='End date' onChange={ date => onUpdate({...task, endDate: date}) } />
 
                 <IconButton 
                     onClick={ () => onDelete(task.id) }>

@@ -26,7 +26,6 @@ export default class DatePicker extends Component {
         super()
         this.state = {
             dialogOpen: false,
-            date: new Date()
         }
     }
 
@@ -36,20 +35,20 @@ export default class DatePicker extends Component {
 
     @autobind
     onSelectDate (date) {
-        this.setState({ date, dialogOpen: false })
+        this.setState({ dialogOpen: false })
         this.props.onChange(date)
     }
 
     render () {
-        const { label } = this.props
-        const { dialogOpen, date } = this.state
+        const { label, value } = this.props
+        const { dialogOpen } = this.state
 
         return (
             <div>
-                <TexField type='text' value={ this.formatDate(date) } disabled label={ label } onClick={ () => this.setState({ dialogOpen: true }) } />
+                <TexField type='text' value={ this.formatDate(value) } disabled label={ label } onClick={ () => this.setState({ dialogOpen: true }) } />
                 <Dialog open={ dialogOpen } onRequestClose={ () => this.setState({ dialogOpen: false }) }>
                     <InfiniteCalendar 
-                        selected={ date } 
+                        selected={ value } 
                         locale={ locale }
                         onSelect={ this.onSelectDate } />
                 </Dialog>
