@@ -3,22 +3,21 @@ import { ADD, UPDATE, DELETE } from '../action-creators/projects'
 export default function projects (state = {}, action) {
     switch (action.type) {
         case ADD: {
-            const { name, description } = action.payload
+            const { project } = action.payload
             let max = 0
             for (var i=0; i<Object.values(state).length; i++) {
                 const id = Object.values(state)[i].id
                 max = Math.max(max, id)
             }
-            const newId = max + 1
-            return { ...state, [newId]: { id: newId, name, description} }
+            project.id = max + 1
+            return { ...state, [project.id]: { ...project } }
         }
   
       case UPDATE: {
-        const { id, name, description } = action.payload
-        const newProject = { id, name, description }
-        if (state[id] !== undefined) {
+        const { project } = action.payload
+        if (state[project.id] !== undefined) {
             let result = { ...state }
-            result[id] = newProject
+            result[project.id] = { ...project }
             return result
         } else {
             throw new Error('Project not found (id=' + id + ')')
@@ -26,10 +25,11 @@ export default function projects (state = {}, action) {
       }
   
       case DELETE: {
+          const { id } = action.payload
           let result = { }
           for (var i=0; i<Object.values(state).length; i++) {
               const project = Object.values(state)[i]
-              if (project.id !== action.payload.id) {
+              if (project.id !== id) {
                   result[project.id] = project
               }
           }

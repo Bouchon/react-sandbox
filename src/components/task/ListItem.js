@@ -7,7 +7,6 @@ import IconButton from 'material-ui/IconButton'
 import DeleteIcon from 'material-ui-icons/Delete'
 
 import DatePicker from '../common/DatePicker'
-import TimePicker from '../common/TimePicker'
 
 const css = {
     item: { display: 'flex', alignItems: 'center', margin: '15px' },

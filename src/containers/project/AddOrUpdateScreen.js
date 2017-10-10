@@ -7,45 +7,55 @@ import Typography from 'material-ui/Typography'
 import TextField from 'material-ui/TextField'
 import Button from 'material-ui/Button'
 
+import DatePicker from '../../components/common/DatePicker'
+
 import { addProject, updateProject } from '../../action-creators/projects'
 
-const DEFAULT_PROJECT = {
-    id: undefined,
-    name: '',
-    description: ''
+const css = { 
+    container: { 
+        display: 'flex', 
+        flexDirection: 'column', 
+        width: '80%', 
+        margin: 'auto'
+    },
+    datesContainer: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-around'
+    },
+    button: { marginTop: '15px' }
 }
-
-const css = { container: { display: 'flex', flexDirection: 'column', width: '80%', margin: 'auto' }}
 
 class AddOrUpdateScreen extends Component {
     constructor () {
         super()
         this.state = { 
-            project: DEFAULT_PROJECT,
+            project: { },
             redirect: false
         }
     }
 
     componentWillMount () {
         const projectId = this.props.match.params.id
-        if (projectId !== undefined) {
-            const project = this.props.projects[projectId]
-            this.setState({project})
-        }
+        const { project } = this.state
+        project.name = project.name === undefined ? '' : project.name
+        project.description = project.description === undefined ? '' : project.description
+
+        this.setState({ project: { ...project, id: projectId }})
     }
 
     @autobind
     addOrUpdate () {
-        const { id, name, description } = this.state.project
+        const { project } = this.state
         const { addProject, updateProject } = this.props
 
-        if (id === undefined) {
-            addProject(name, description)
+        if (project.id === undefined) {
+            addProject(project)
         } else {
-            updateProject(id, name, description)
+            updateProject(project)
         }
 
-        this.setState({redirect: true})
+        this.setState({ redirect: true })
     }
 
     render () {
@@ -53,23 +63,41 @@ class AddOrUpdateScreen extends Component {
             return <Redirect to='/project/list' />
         }
 
-        const isEdition = this.state.project.id !== undefined
+        const { project } = this.state 
+        const isEdition = project.id !== undefined
         const title = isEdition === true ? 'Edit' : 'Create'
         return (
             <div style={css.container}>
                 <Typography type='display2'>{title} Project</Typography>
-                <TextField value={this.state.project.name}
-                    onChange={event => this.setState({project: {...this.state.project, name: event.target.value }})}
+
+                <TextField value={ project.name }
+                    onChange={ event => this.setState({ project: { ...project, name: event.target.value } }) }
                     label='Name'
                     placeholder='Project name'
                     margin='normal' />
+
                 <TextField value={this.state.project.description}
-                    onChange={event => this.setState({project: {...this.state.project, description: event.target.value }})}
+                    onChange={ event => this.setState({ project: { ...project, description: event.target.value } }) }
                     label='Description'
                     placeholder='Project description'
                     margin='normal' />
-                <Button raised color='primary'
-                    onClick={this.addOrUpdate}>{title}</Button>
+
+                <div style={ css.datesContainer }>
+                    <DatePicker 
+                        value={ project.startDate }
+                        minDate={ new Date() }
+                        maxDate={ project.endDate }
+                        label='Start date'
+                        onChange={ date => this.setState({ project: { ...project, startDate: date } }) } />
+                    
+                    <DatePicker 
+                        value={ project.endDate }
+                        minDate={ project.startDate }
+                        label='End date'
+                        onChange={ date => this.setState({ project: { ...project, endDate: date } }) } />
+                </div>
+                <Button raised color='primary' style={ css.button }
+                    onClick={ this.addOrUpdate }>{ title }</Button>
             </div>
         )
     }

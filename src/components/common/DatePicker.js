@@ -40,15 +40,18 @@ export default class DatePicker extends Component {
     }
 
     render () {
-        const { label, value } = this.props
+        const { label, value, minDate, maxDate } = this.props
         const { dialogOpen } = this.state
-
+        const min = minDate === undefined ? undefined : new Date(minDate)
+        const max = maxDate === undefined ? undefined : new Date(maxDate)
         return (
             <div>
                 <TexField type='text' value={ this.formatDate(value) } disabled label={ label } onClick={ () => this.setState({ dialogOpen: true }) } />
                 <Dialog open={ dialogOpen } onRequestClose={ () => this.setState({ dialogOpen: false }) }>
                     <InfiniteCalendar 
-                        selected={ value } 
+                        selected={ value }
+                        minDate={ min } min={ min }
+                        maxDate={ max } max={ max }
                         locale={ locale }
                         onSelect={ this.onSelectDate } />
                 </Dialog>
