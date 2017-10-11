@@ -6,13 +6,13 @@ export default class Menu extends Component {
 
     render () {
         const { projectId } = this.props
-        const { open, anchor, onClose, onEdit, onDelete, onDashboard } = this.props
+        const { open, anchor, onClose, onUpdate, onDelete, onDashboard } = this.props
         return (
             <MaterialMenu
                 open={ open }
                 anchorEl={ anchor }
                 onRequestClose={ onClose }>
-                <MenuItem onClick={ onEdit }>Edit</MenuItem>                
+                <MenuItem onClick={ onUpdate }>Edit</MenuItem>                
                 <MenuItem onClick={ onDelete }>Delete</MenuItem>
                 <MenuItem onClick={ onDashboard }>Dashboard</MenuItem>
             </MaterialMenu>

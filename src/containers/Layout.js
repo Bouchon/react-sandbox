@@ -4,29 +4,32 @@ import { BrowserRouter as Router } from 'react-router-dom'
 import Hidden from 'material-ui/Hidden'
 import Grid from 'material-ui/Grid'
 
+import { grey } from 'material-ui/colors'
+
 const css = {
-    layout: { display: 'flex', height: '100%' },
+    layout: { display: 'flex', minHeight: '100vh', backgroundColor: grey[200] },
     leftNavigation: { width: '250px', height: '100%' },
     container: { flexGrow: 1 },
-    page: { flexGrow: 1, padding: '8px' }
+    page: { padding: '8px' }
 }
 
 export default class Layout extends Component {
     render () {
+        const { leftNav, appBar, children } = this.props
         return (
             <Router>
-                <div style={css.layout}>
+                <div style={ css.layout }>
                     <Hidden mdDown>
-                        <div style={css.leftNavigation}>
-                            {this.props.leftNav}
+                        <div style={ css.leftNavigation }>
+                            { leftNav }
                         </div>
                     </Hidden>
-                    <div style={css.container}>
-                        {this.props.appBar}
-                        <div style={css.page}>
+                    <div style={ css.container }>
+                        { appBar }
+                        <div style={ css.page }>
                             <Grid container>
                                 <Grid item xs={12}>
-                                    { this.props.children }
+                                    { children }
                                 </Grid>
                             </Grid>
                         </div>
