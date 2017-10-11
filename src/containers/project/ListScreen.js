@@ -17,9 +17,10 @@ import List from '../../components/project/List'
 const css = {
     header: { 
         flexGrow: '1',
-        padding: '15px 0'
+        padding: '30px 0'
     },
-    headerTitle: { color: 'white' }
+    noPadding: { padding: '0 0 28px 0', position: 'relative' },
+    fab: { position: 'absolute', right: '28px', bottom: '0px', zIndex: 1 }
 }
 
 class ListScreen extends Component {
@@ -45,11 +46,19 @@ class ListScreen extends Component {
 
         const { projects, deleteProject } = this.props
         return (
-            <Grid container>
-                <Paper style={ css.header }>
-                    <Typography type='display2' align='center'>Projects</Typography>
-                </Paper>
-                <Grid item xs={12}>
+            <Grid container justify='center'>
+                <Grid item xs={12} style={ css.noPadding }>
+                    <Paper style={ css.header }>
+                        <Typography type='display2' align='center'>Projects</Typography>
+                    </Paper>
+                    <Button fab raised
+                        style={ css.fab } 
+                        color='accent' 
+                        onClick={ () => this.setState({ onAdd: true }) }>
+                        <AddIcon />
+                    </Button>
+                </Grid>
+                <Grid item xs={10} md={6} xl={4} >
                     {
                         Object.values(projects).length === 0 ? 
                             <Typography><i>Project list is empty</i></Typography> :
@@ -59,7 +68,6 @@ class ListScreen extends Component {
                                 onDelete={ id => deleteProject(id) }
                                 onDashboard={ id => this.setState({ onDashboard: true, projectId: id })} />
                     }
-                    <Button fab raised color='accent' onClick={ () => this.setState({ onAdd: true }) }><AddIcon /></Button>
                 </Grid>
             </Grid>
         )
