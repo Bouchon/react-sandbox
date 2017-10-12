@@ -7,17 +7,21 @@ import Typography from 'material-ui/Typography'
 import AppBar from 'material-ui/AppBar'
 import Paper from 'material-ui/Paper'
 import Button from 'material-ui/Button'
-
 import AddIcon from 'material-ui-icons/Add'
 import { indigo } from 'material-ui/colors'
 
+import hero from '../../images/project-hero.jpg'
 import { deleteProject } from '../../action-creators/projects'
 import List from '../../components/project/List'
 
 const css = {
-    header: { 
+    header: {
+        display: 'flex',
+        alignItems: 'center',
         flexGrow: '1',
-        padding: '30px 0'
+        padding: '15px 60px',
+        backgroundColor: '#4f9cd0',
+        color: 'white'
     },
     noPadding: { padding: '0 0 28px 0', position: 'relative' },
     fab: { position: 'absolute', right: '28px', bottom: '0px', zIndex: 1 }
@@ -49,6 +53,7 @@ class ListScreen extends Component {
             <Grid container justify='center'>
                 <Grid item xs={12} style={ css.noPadding }>
                     <Paper style={ css.header }>
+                        <img src={hero} height={128} />
                         <Typography type='display2' align='center'>Projects</Typography>
                     </Paper>
                     <Button fab raised
