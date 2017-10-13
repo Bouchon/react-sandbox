@@ -19,7 +19,7 @@ export default class List extends Component {
                         return <ListItem
                             key={ project.id }
                             project={ project }
-                            onEdit={ () => onEdit(project.id) }
+                            onUpdate={ () => onUpdate(project.id) }
                             onDelete={ () => onDelete(project.id) }
                             onDashboard={ () =>onDashboard(project.id) } />
                     })

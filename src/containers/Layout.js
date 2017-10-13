@@ -7,10 +7,10 @@ import Grid from 'material-ui/Grid'
 import { grey } from 'material-ui/colors'
 
 const css = {
-    layout: { display: 'flex', minHeight: '100vh', backgroundColor: grey[200] },
-    leftNavigation: { width: '250px', height: '100%' },
-    container: { flexGrow: 1 },
-    page: { padding: '8px' }
+    layout: { display: 'flex' },
+    leftNav: { width: '250px', height: '100vh' },
+    rightContent: { display: 'flex', flexDirection: 'column', flexGrow: 1 },
+    page: { margin: '0px' }
 }
 
 export default class Layout extends Component {
@@ -20,19 +20,17 @@ export default class Layout extends Component {
             <Router>
                 <div style={ css.layout }>
                     <Hidden mdDown>
-                        <div style={ css.leftNavigation }>
+                        <div style={css.leftNav}>
                             { leftNav }
                         </div>
                     </Hidden>
-                    <div style={ css.container }>
-                        { appBar }
-                        <div style={ css.page }>
-                            <Grid container>
-                                <Grid item xs={12}>
-                                    { children }
-                                </Grid>
-                            </Grid>
+                    <div style={ css.rightContent }>
+                        <div>
+                            { appBar }
                         </div>
+                        <Grid container direction='column' spacing={0} style={ css.page }>
+                            { children }
+                        </Grid>
                     </div>
                 </div>
             </Router>

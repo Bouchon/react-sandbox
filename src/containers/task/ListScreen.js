@@ -8,6 +8,7 @@ import Button from 'material-ui/Button'
 import AddIcon from 'material-ui-icons/Add'
 import ArrowBackIcon from 'material-ui-icons/ArrowBack'
 
+import Table from '../../components/task/Table'
 import ListItem from '../../components/task/ListItem'
 import { addTask, updateTask, deleteTask } from '../../action-creators/tasks'
 
@@ -39,6 +40,7 @@ class ListScreen extends Component {
                         <ArrowBackIcon /> Project ({ project.name })
                     </Button>
                     <Typography type='display2'>Tasks</Typography>
+                    <Table tasks={ projectTasks } />
                     {
                         projectTasks.length === 0 ? 
                             <Typography type='title' gutterBottom><i>No tasks found for this project, click the "+" button to create a new task.</i></Typography> :

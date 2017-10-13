@@ -37,11 +37,13 @@ class AddOrUpdateScreen extends Component {
 
     componentWillMount () {
         const projectId = this.props.match.params.id
-        const { project } = this.state
+        const id = projectId === undefined ? undefined : parseInt(projectId)
+        const project = id === undefined ? { } : this.props.projects[projectId]
+        
         project.name = project.name === undefined ? '' : project.name
         project.description = project.description === undefined ? '' : project.description
 
-        this.setState({ project: { ...project, id: projectId }})
+        this.setState({ project: { ...project, id }})
     }
 
     @autobind
