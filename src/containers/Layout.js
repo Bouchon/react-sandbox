@@ -10,7 +10,7 @@ const css = {
     layout: { display: 'flex' },
     leftNav: { width: '250px', height: '100vh' },
     rightContent: { display: 'flex', flexDirection: 'column', flexGrow: 1 },
-    page: { margin: '0px' }
+    page: { padding: 8 }
 }
 
 export default class Layout extends Component {

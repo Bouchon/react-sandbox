@@ -39,8 +39,10 @@ class ListScreen extends Component {
 
         const { projects, deleteProject } = this.props
         return (
-            <div>
+            <Grid container>
                 <Hero title='Projects' fabIcon={ <AddIcon /> } onFabClick={ () => this.setState({ onAdd: true }) } />
+                
+                <Grid item xs={12} md={8} lg={6} style={{margin: 'auto'}}>
                 { Object.values(projects).length === 0 ?
                     <Typography><i>Project list is empty</i></Typography> :
                     <List 
@@ -48,7 +50,8 @@ class ListScreen extends Component {
                         onUpdate={ id => this.setState({ onUpdate: true, projectId: id }) }
                         onDelete={ id => deleteProject(id) }
                         onDashboard={ id => this.setState({ onDashboard: true, projectId: id })} /> }
-            </div>
+                </Grid>
+            </Grid>
         )
     }
 }

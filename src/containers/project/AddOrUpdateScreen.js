@@ -4,20 +4,16 @@ import autobind from 'autobind-decorator'
 import { Redirect } from 'react-router'
 
 import Typography from 'material-ui/Typography'
+import Grid from 'material-ui/Grid'
 import TextField from 'material-ui/TextField'
 import Button from 'material-ui/Button'
 
+import Hero from '../../components/common/Hero'
 import DatePicker from '../../components/common/DatePicker'
 
 import { addProject, updateProject } from '../../action-creators/projects'
 
 const css = { 
-    container: { 
-        display: 'flex', 
-        flexDirection: 'column', 
-        width: '80%', 
-        margin: 'auto'
-    },
     datesContainer: {
         display: 'flex',
         alignItems: 'center',
@@ -69,38 +65,40 @@ class AddOrUpdateScreen extends Component {
         const isEdition = project.id !== undefined
         const title = isEdition === true ? 'Edit' : 'Create'
         return (
-            <div style={css.container}>
-                <Typography type='display2'>{title} Project</Typography>
+            <Grid container justify='center'>
+                <Hero title={ title } />
+                
+                <Grid item xs={8} container direction='column'>
+                    <TextField value={ project.name }
+                        onChange={ event => this.setState({ project: { ...project, name: event.target.value } }) }
+                        label='Name'
+                        placeholder='Project name'
+                        margin='normal' />
 
-                <TextField value={ project.name }
-                    onChange={ event => this.setState({ project: { ...project, name: event.target.value } }) }
-                    label='Name'
-                    placeholder='Project name'
-                    margin='normal' />
+                    <TextField value={this.state.project.description}
+                        onChange={ event => this.setState({ project: { ...project, description: event.target.value } }) }
+                        label='Description'
+                        placeholder='Project description'
+                        margin='normal' />
 
-                <TextField value={this.state.project.description}
-                    onChange={ event => this.setState({ project: { ...project, description: event.target.value } }) }
-                    label='Description'
-                    placeholder='Project description'
-                    margin='normal' />
-
-                <div style={ css.datesContainer }>
-                    <DatePicker 
-                        value={ project.startDate }
-                        minDate={ new Date() }
-                        maxDate={ project.endDate }
-                        label='Start date'
-                        onChange={ date => this.setState({ project: { ...project, startDate: date } }) } />
-                    
-                    <DatePicker 
-                        value={ project.endDate }
-                        minDate={ project.startDate }
-                        label='End date'
-                        onChange={ date => this.setState({ project: { ...project, endDate: date } }) } />
-                </div>
-                <Button raised color='primary' style={ css.button }
-                    onClick={ this.addOrUpdate }>{ title }</Button>
-            </div>
+                    <div style={ css.datesContainer }>
+                        <DatePicker 
+                            value={ project.startDate }
+                            minDate={ new Date() }
+                            maxDate={ project.endDate }
+                            label='Start date'
+                            onChange={ date => this.setState({ project: { ...project, startDate: date } }) } />
+                        
+                        <DatePicker 
+                            value={ project.endDate }
+                            minDate={ project.startDate }
+                            label='End date'
+                            onChange={ date => this.setState({ project: { ...project, endDate: date } }) } />
+                    </div>
+                    <Button raised color='primary' style={ css.button }
+                        onClick={ this.addOrUpdate }>{ title }</Button>
+                </Grid>
+            </Grid>
         )
     }
 }

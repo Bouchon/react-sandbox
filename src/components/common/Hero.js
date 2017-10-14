@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 
 import Typography from 'material-ui/Typography'
+import Grid from 'material-ui/Grid'
 import Paper from 'material-ui/Paper'
 import Button from 'material-ui/Button'
 
@@ -37,10 +38,14 @@ export default class Hero extends Component {
         }
 
         return (
-            <Paper square style={ css.header }>
-                <Typography type='display1' align='center'>{ title }</Typography>
-                { button }
-            </Paper>
+            <Grid container spacing={0}>
+                <Grid item xs={12}>
+                    <Paper square style={ css.header }>
+                        <Typography type='display1' align='center'>{ title }</Typography>
+                        { button }
+                    </Paper>
+                </Grid>
+            </Grid>
         )
     }
 }
