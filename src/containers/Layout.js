@@ -9,8 +9,7 @@ import { grey } from 'material-ui/colors'
 const css = {
     layout: { display: 'flex' },
     leftNav: { width: '250px', height: '100vh' },
-    rightContent: { display: 'flex', flexDirection: 'column', flexGrow: 1 },
-    page: { padding: 8 }
+    rightContent: { flexGrow: 1 }
 }
 
 export default class Layout extends Component {
@@ -28,9 +27,9 @@ export default class Layout extends Component {
                         <div>
                             { appBar }
                         </div>
-                        <Grid container direction='column' spacing={0} style={ css.page }>
+                        <div>
                             { children }
-                        </Grid>
+                        </div>
                     </div>
                 </div>
             </Router>

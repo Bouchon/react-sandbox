@@ -6,20 +6,23 @@ import Grid from 'material-ui/Grid'
 import Typography from 'material-ui/Typography'
 import Paper from 'material-ui/Paper'
 import Button from 'material-ui/Button'
-import AddIcon from 'material-ui-icons/Add'
 import { indigo } from 'material-ui/colors'
 
 import { deleteProject } from '../../action-creators/projects'
+import AlertDialog from '../../components/common/AlertDialog'
 import List from '../../components/project/List'
+import Cards from '../../components/project/Cards'
 import Hero from '../../components/common/Hero'
 
 const css = {
+    page: { padding: '24px' }
 }
 
 class ListScreen extends Component {
     constructor () {
         super()
-        this.state = { 
+        this.state = {
+            dialogOpen: false,
             onAdd: false, 
             onUpdate: false, 
             onDashboard: false,
@@ -37,21 +40,35 @@ class ListScreen extends Component {
             return <Redirect to={'/project/' + this.state.projectId + '/dashboard/'} />
         }
 
+        const breadCrumb = [
+            { name: 'Projects' }
+        ]
+
         const { projects, deleteProject } = this.props
         return (
-            <Grid container>
-                <Hero title='Projects' fabIcon={ <AddIcon /> } onFabClick={ () => this.setState({ onAdd: true }) } />
-                
-                <Grid item xs={12} md={8} lg={6} style={{margin: 'auto'}}>
-                { Object.values(projects).length === 0 ?
-                    <Typography><i>Project list is empty</i></Typography> :
-                    <List 
-                        projects={ projects }
-                        onUpdate={ id => this.setState({ onUpdate: true, projectId: id }) }
-                        onDelete={ id => deleteProject(id) }
-                        onDashboard={ id => this.setState({ onDashboard: true, projectId: id })} /> }
-                </Grid>
-            </Grid>
+            <div>
+                <Hero breadCrumb={ breadCrumb } />
+                <div style={ css.page }>
+                {
+                    Object.values(projects).length === 0 ?
+                        <Typography><i>Project list is empty</i></Typography> :
+                        <Cards 
+                            projects={ projects }
+                            onAdd={ () => this.setState({ onAdd: true }) }
+                            onUpdate={ id => this.setState({ onUpdate: true, projectId: id }) }
+                            onDelete={ id => { this.setState({ dialogOpen: true, projectId: id }) } }
+                            onDashboard={ id => this.setState({ onDashboard: true, projectId: id })} />
+                }
+                </div>
+                <AlertDialog
+                    open={ this.state.dialogOpen }
+                    onCancel={ () => this.setState({ dialogOpen: false }) }
+                    onConfirm={ () => { deleteProject(this.state.projectId); this.setState({ dialogOpen: false }) } }
+                    title='Delete project ?'
+                    contentText='Are you sure ?'
+                    cancelText='Cancel'
+                    confirmText='Delete' />
+            </div>
         )
     }
 }
