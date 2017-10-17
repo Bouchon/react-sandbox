@@ -50,14 +50,12 @@ class ListScreen extends Component {
                 <Hero breadCrumb={ breadCrumb } />
                 <div style={ css.page }>
                 {
-                    Object.values(projects).length === 0 ?
-                        <Typography><i>Project list is empty</i></Typography> :
-                        <Cards 
-                            projects={ projects }
-                            onAdd={ () => this.setState({ onAdd: true }) }
-                            onUpdate={ id => this.setState({ onUpdate: true, projectId: id }) }
-                            onDelete={ id => { this.setState({ dialogOpen: true, projectId: id }) } }
-                            onDashboard={ id => this.setState({ onDashboard: true, projectId: id })} />
+                    <Cards 
+                        projects={ projects }
+                        onAdd={ () => this.setState({ onAdd: true }) }
+                        onUpdate={ id => this.setState({ onUpdate: true, projectId: id }) }
+                        onDelete={ id => { this.setState({ dialogOpen: true, projectId: id }) } }
+                        onDashboard={ id => this.setState({ onDashboard: true, projectId: id })} />
                 }
                 </div>
                 <AlertDialog

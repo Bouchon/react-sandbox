@@ -30,10 +30,29 @@ const css = {
 export default class Cards extends Component {
     constructor () {
         super()
-        this.state = { size: 56 }
+        this.state = { addMotion: 0 }
+
+        const speed = 100
+        const size = this.getFunction(56, 240, speed)
+        const opacity = this.getFunction(1, 0, speed)
+        this.addMotion = { speed, size, opacity } 
     }
+
+    getFunction (start, end, speed) {
+        return { start, end, a: (end - start) / speed, b: start }
+    }
+
+    toggleAddMotion() {
+        const addMotion = this.state.addMotion === 0 ? this.addMotion.speed : 0
+        const { speed, size, opacity } = this.addMotion
+        this.addMotion.size = this.getFunction(size.start, size.end, speed)
+        this.addMotion.opacity = this.getFunction(opacity.start, opacity.end, speed)
+        this.setState({ addMotion })
+    }
+
     render () {
         const { projects, onAdd, onDashboard, onUpdate, onDelete } = this.props
+        
         return (
             <Grid container align='center'>
             {
@@ -63,21 +82,27 @@ export default class Cards extends Component {
             }
                 <Grid item>
                     <div style={ css.addDiv }>
-                        <Motion style={{x: spring(this.state.size, presets.stiff)}}>
-                        { value =>
-                            <Button 
-                                onClick={ () => this.setState({ size: this.state.size === 240 ? 56 : 240 }) }
-                                style={ { 
-                                    ...css.addButton, 
-                                    width: value.x + 'px', 
-                                    height: value.x + 'px',
-                                    left: 'calc(50% - ' + (value.x / 2) + 'px)',
-                                    top: 'calc(50% - ' + (value.x / 2) + 'px)',
-                                } } 
-                                fab color='accent' aria-label='add'>
-                                <AddIcon />
-                            </Button>
-                        }
+                        <Motion style={{x: spring(this.state.addMotion, presets.wobbly), y: spring(this.state.addMotion) } }>
+                        { value => {
+                            const size = this.addMotion.size.a * value.x + this.addMotion.size.b
+                            const opacity = this.addMotion.opacity.a * value.y + this.addMotion.opacity.b
+                            return (
+                                <Button
+                                    disableRipple
+                                    onClick={ () => this.toggleAddMotion() }
+                                    style={ { 
+                                        ...css.addButton, 
+                                        width: size + 'px',
+                                        height: size + 'px',
+                                        left: 'calc(50% - ' + (size / 2) + 'px)',
+                                        top: 'calc(50% - ' + (size / 2) + 'px)',
+                                        opacity: opacity
+                                    } } 
+                                    fab color='accent' aria-label='add'>
+                                    <AddIcon />
+                                </Button>
+                            )
+                        } }
                         </Motion>
                     </div>
                 </Grid>
