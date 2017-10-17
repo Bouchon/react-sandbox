@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { Motion, spring } from 'react-motion'
+import { presets } from 'react-motion'
 
 import Grid from 'material-ui/Grid'
 import Typography from 'material-ui/Typography'
@@ -15,15 +17,21 @@ const css = {
         height: '188px' 
     },
     addDiv: {
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        minWidth: '150px',
+        position: 'relative',
+        overflow: 'hidden',
+        width: '150px',
         height: '188px'
+    },
+    addButton: {
+        position: 'absolute'
     }
 }
 
 export default class Cards extends Component {
+    constructor () {
+        super()
+        this.state = { size: 56 }
+    }
     render () {
         const { projects, onAdd, onDashboard, onUpdate, onDelete } = this.props
         return (
@@ -55,9 +63,22 @@ export default class Cards extends Component {
             }
                 <Grid item>
                     <div style={ css.addDiv }>
-                        <Button onClick={ onAdd } fab color='accent' aria-label='add'>
-                            <AddIcon />
-                        </Button>
+                        <Motion style={{x: spring(this.state.size, presets.stiff)}}>
+                        { value =>
+                            <Button 
+                                onClick={ () => this.setState({ size: this.state.size === 240 ? 56 : 240 }) }
+                                style={ { 
+                                    ...css.addButton, 
+                                    width: value.x + 'px', 
+                                    height: value.x + 'px',
+                                    left: 'calc(50% - ' + (value.x / 2) + 'px)',
+                                    top: 'calc(50% - ' + (value.x / 2) + 'px)',
+                                } } 
+                                fab color='accent' aria-label='add'>
+                                <AddIcon />
+                            </Button>
+                        }
+                        </Motion>
                     </div>
                 </Grid>
             </Grid>
