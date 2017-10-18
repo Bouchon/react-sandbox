@@ -16,7 +16,7 @@ export default class AlertDialog extends Component {
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={ onCancel } color="primary">{ cancelText }</Button>
-                    <Button onClick={ onConfirm } color="primary">{ confirmText }</Button>
+                    <Button onClick={ onConfirm } color="accent">{ confirmText }</Button>
                 </DialogActions>
             </Dialog>
         )

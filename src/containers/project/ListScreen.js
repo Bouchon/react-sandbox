@@ -8,7 +8,7 @@ import Paper from 'material-ui/Paper'
 import Button from 'material-ui/Button'
 import { indigo } from 'material-ui/colors'
 
-import { deleteProject } from '../../action-creators/projects'
+import { addProject, deleteProject } from '../../action-creators/projects'
 import AlertDialog from '../../components/common/AlertDialog'
 import List from '../../components/project/List'
 import Cards from '../../components/project/Cards'
@@ -32,9 +32,7 @@ class ListScreen extends Component {
 
     render () {
         // REDIRECTIONS
-        if (this.state.onAdd === true) {
-            return <Redirect to='/project/add' />
-        } else if (this.state.onUpdate === true) {
+        if (this.state.onUpdate === true) {
             return <Redirect to={'/project/' + this.state.projectId + '/edit/' } />
         } else if (this.state.onDashboard === true) {
             return <Redirect to={'/project/' + this.state.projectId + '/dashboard/'} />
@@ -44,7 +42,7 @@ class ListScreen extends Component {
             { name: 'Projects' }
         ]
 
-        const { projects, deleteProject } = this.props
+        const { projects, addProject, deleteProject } = this.props
         return (
             <div>
                 <Hero breadCrumb={ breadCrumb } />
@@ -52,7 +50,7 @@ class ListScreen extends Component {
                 {
                     <Cards 
                         projects={ projects }
-                        onAdd={ () => this.setState({ onAdd: true }) }
+                        onAdd={ project => addProject(project) }
                         onUpdate={ id => this.setState({ onUpdate: true, projectId: id }) }
                         onDelete={ id => { this.setState({ dialogOpen: true, projectId: id }) } }
                         onDashboard={ id => this.setState({ onDashboard: true, projectId: id })} />
@@ -72,4 +70,4 @@ class ListScreen extends Component {
 }
 
 const mapStateToProps = ({ projects }) => ({ projects })
-export default connect(mapStateToProps, { deleteProject })(ListScreen)
+export default connect(mapStateToProps, { addProject, deleteProject })(ListScreen)

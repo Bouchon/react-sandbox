@@ -9,7 +9,7 @@ export default class LeftNavigation extends Component {
         const { type, open, onClick } = this.props
 
         return (
-            <Drawer type={type} open={open} onClick={onClick}>
+            <Drawer style={ { width: '250px' } } type={type} open={open} onClick={onClick}>
                 <List disablePadding style={{width: '249px'}}>
                     <Link to='/'>
                         <ListItem button>
