@@ -37,9 +37,7 @@ function getStylesCreator(stylesOrCreator) {
 
     (0, _keys2.default)(overrides).forEach(function (key) {
       process.env.NODE_ENV !== "production" ? (0, _warning2.default)(stylesWithOverrides[key], 'You are trying to overrides a style that do not exist.') : void 0;
-      stylesWithOverrides[key] = (0, _deepmerge2.default)(stylesWithOverrides[key], overrides[key], {
-        clone: true // We don't want to mutate the input
-      });
+      stylesWithOverrides[key] = (0, _deepmerge2.default)(stylesWithOverrides[key], overrides[key]);
     });
 
     return stylesWithOverrides;

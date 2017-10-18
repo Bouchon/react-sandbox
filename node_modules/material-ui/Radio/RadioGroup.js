@@ -3,7 +3,6 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.styles = undefined;
 
 var _extends2 = require('babel-runtime/helpers/extends');
 
@@ -37,14 +36,6 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _classnames = require('classnames');
-
-var _classnames2 = _interopRequireDefault(_classnames);
-
-var _withStyles = require('../styles/withStyles');
-
-var _withStyles2 = _interopRequireDefault(_withStyles);
-
 var _FormGroup = require('../Form/FormGroup');
 
 var _FormGroup2 = _interopRequireDefault(_FormGroup);
@@ -56,18 +47,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var babelPluginFlowReactPropTypes_proptype_Node = require('react').babelPluginFlowReactPropTypes_proptype_Node || require('prop-types').any;
 // @inheritedComponent FormGroup
 
-var styles = exports.styles = {
-  root: {
-    flex: '1 1 auto',
-    margin: 0,
-    padding: 0
-  }
-};
-
 var babelPluginFlowReactPropTypes_proptype_Props = {
   children: typeof babelPluginFlowReactPropTypes_proptype_Node === 'function' ? babelPluginFlowReactPropTypes_proptype_Node : require('prop-types').shape(babelPluginFlowReactPropTypes_proptype_Node),
-  classes: require('prop-types').object,
-  className: require('prop-types').string,
   name: require('prop-types').string,
   onBlur: require('prop-types').func,
   onChange: require('prop-types').func,
@@ -126,23 +107,17 @@ var RadioGroup = function (_React$Component) {
 
       var _props = this.props,
           children = _props.children,
-          classes = _props.classes,
-          classNameProp = _props.className,
           name = _props.name,
           value = _props.value,
           onChange = _props.onChange,
-          other = (0, _objectWithoutProperties3.default)(_props, ['children', 'classes', 'className', 'name', 'value', 'onChange']);
+          other = (0, _objectWithoutProperties3.default)(_props, ['children', 'name', 'value', 'onChange']);
 
 
       this.radios = [];
 
       return _react2.default.createElement(
         _FormGroup2.default,
-        (0, _extends3.default)({
-          className: (0, _classnames2.default)(classes.root, classNameProp),
-
-          role: 'radiogroup'
-        }, other),
+        (0, _extends3.default)({ role: 'radiogroup' }, other),
         _react2.default.Children.map(children, function (child, index) {
           if (!_react2.default.isValidElement(child)) {
             return null;
@@ -164,4 +139,12 @@ var RadioGroup = function (_React$Component) {
   return RadioGroup;
 }(_react2.default.Component);
 
-exports.default = (0, _withStyles2.default)(styles, { name: 'MuiRadioGroup' })(RadioGroup);
+RadioGroup.propTypes = process.env.NODE_ENV !== "production" ? {
+  children: typeof babelPluginFlowReactPropTypes_proptype_Node === 'function' ? babelPluginFlowReactPropTypes_proptype_Node : require('prop-types').shape(babelPluginFlowReactPropTypes_proptype_Node),
+  name: require('prop-types').string,
+  onBlur: require('prop-types').func,
+  onChange: require('prop-types').func,
+  onKeyDown: require('prop-types').func,
+  value: require('prop-types').string
+} : {};
+exports.default = RadioGroup;

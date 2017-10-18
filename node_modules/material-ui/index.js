@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Tooltip = exports.Toolbar = exports.TextField = exports.Typography = exports.Tab = exports.Tabs = exports.TableSortLabel = exports.TableRow = exports.TablePagination = exports.TableHead = exports.TableFooter = exports.TableCell = exports.TableBody = exports.Table = exports.Switch = exports.SvgIcon = exports.colors = exports.createMuiTheme = exports.withTheme = exports.withStyles = exports.MuiThemeProvider = exports.SnackbarContent = exports.Snackbar = exports.Select = exports.RadioGroup = exports.Radio = exports.LinearProgress = exports.CircularProgress = exports.Popover = exports.Paper = exports.MenuList = exports.MenuItem = exports.Menu = exports.ListSubheader = exports.ListItemText = exports.ListItemSecondaryAction = exports.ListItemIcon = exports.ListItemAvatar = exports.ListItem = exports.List = exports.Grid = exports.InputLabel = exports.Input = exports.IconButton = exports.Icon = exports.Hidden = exports.FormControlLabel = exports.FormHelperText = exports.FormLabel = exports.FormGroup = exports.FormControl = exports.Drawer = exports.Divider = exports.DialogTitle = exports.DialogContentText = exports.DialogContent = exports.DialogActions = exports.Dialog = exports.Chip = exports.Checkbox = exports.CardMedia = exports.CardHeader = exports.CardContent = exports.CardActions = exports.Card = exports.ButtonBase = exports.Button = exports.BottomNavigationButton = exports.BottomNavigation = exports.Badge = exports.Avatar = exports.AppBar = undefined;
+exports.withWidth = exports.Tooltip = exports.Toolbar = exports.TextField = exports.Typography = exports.Tab = exports.Tabs = exports.TableSortLabel = exports.TableRow = exports.TablePagination = exports.TableHead = exports.TableFooter = exports.TableCell = exports.TableBody = exports.Table = exports.Switch = exports.SvgIcon = exports.colors = exports.createMuiTheme = exports.withTheme = exports.withStyles = exports.MuiThemeProvider = exports.SnackbarContent = exports.Snackbar = exports.Select = exports.RadioGroup = exports.Radio = exports.LinearProgress = exports.CircularProgress = exports.Popover = exports.Paper = exports.MenuList = exports.MenuItem = exports.Menu = exports.ListSubheader = exports.ListItemText = exports.ListItemSecondaryAction = exports.ListItemIcon = exports.ListItemAvatar = exports.ListItem = exports.List = exports.Grid = exports.InputLabel = exports.Input = exports.IconButton = exports.Icon = exports.Hidden = exports.FormControlLabel = exports.FormHelperText = exports.FormLabel = exports.FormGroup = exports.FormControl = exports.Drawer = exports.Divider = exports.DialogTitle = exports.DialogContentText = exports.DialogContent = exports.DialogActions = exports.Dialog = exports.Chip = exports.Checkbox = exports.CardMedia = exports.CardHeader = exports.CardContent = exports.CardActions = exports.Card = exports.ButtonBase = exports.Button = exports.BottomNavigationButton = exports.BottomNavigation = exports.Badge = exports.Avatar = exports.AppBar = undefined;
 
 var _AppBar = require('./AppBar');
 
@@ -533,6 +533,15 @@ Object.defineProperty(exports, 'Tooltip', {
   enumerable: true,
   get: function get() {
     return _interopRequireDefault(_Tooltip).default;
+  }
+});
+
+var _withWidth = require('./utils/withWidth');
+
+Object.defineProperty(exports, 'withWidth', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_withWidth).default;
   }
 });
 

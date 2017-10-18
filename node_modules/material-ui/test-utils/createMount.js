@@ -20,9 +20,9 @@ var _enzyme = require('enzyme');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// Generate an enhanced mount function.
-//  weak
+var babelPluginFlowReactPropTypes_proptype_Element = require('react').babelPluginFlowReactPropTypes_proptype_Element || require('prop-types').any; //  weak
 
+// Generate an enhanced mount function.
 function createMount() {
   var options1 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   var _options1$mount = options1.mount,

@@ -62,6 +62,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var babelPluginFlowReactPropTypes_proptype_Element = require('react').babelPluginFlowReactPropTypes_proptype_Element || require('prop-types').any;
 // @inheritedComponent ButtonBase
 
+var babelPluginFlowReactPropTypes_proptype_Node = require('react').babelPluginFlowReactPropTypes_proptype_Node || require('prop-types').any;
+
 var styles = exports.styles = function styles(theme) {
   return {
     root: {
@@ -116,7 +118,7 @@ var babelPluginFlowReactPropTypes_proptype_Props = {
   classes: require('prop-types').object,
   className: require('prop-types').string,
   icon: require('prop-types').oneOfType([require('prop-types').string, typeof babelPluginFlowReactPropTypes_proptype_Element === 'function' ? babelPluginFlowReactPropTypes_proptype_Element : require('prop-types').shape(babelPluginFlowReactPropTypes_proptype_Element)]),
-  label: require('prop-types').oneOfType([require('prop-types').string, typeof babelPluginFlowReactPropTypes_proptype_Element === 'function' ? babelPluginFlowReactPropTypes_proptype_Element : require('prop-types').shape(babelPluginFlowReactPropTypes_proptype_Element)]),
+  label: typeof babelPluginFlowReactPropTypes_proptype_Node === 'function' ? babelPluginFlowReactPropTypes_proptype_Node : require('prop-types').shape(babelPluginFlowReactPropTypes_proptype_Node),
   onChange: require('prop-types').func,
   onClick: require('prop-types').func,
   selected: require('prop-types').bool,

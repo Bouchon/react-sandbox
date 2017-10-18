@@ -76,18 +76,22 @@ export default class Cards extends Component {
         const { projects, onAdd, onDashboard, onUpdate, onDelete } = this.props
         const { newProject } = this.state
         return (
-            <div style={{ display: 'flex', flexWrap: 'wrap' }}>                
+            // <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+            <Grid container>
                 { Object.values(projects).map(project => (
-                        <ProjectCard 
-                            key={ project.id }
-                            project={ project }
-                            onDashboard={ () => onDashboard(project.id) }
-                            onEdit={ () => onUpdate(project.id) }
-                            onDelete={ () => onDelete(project.id) } />
+                        <Grid item key={ project.id } xs={12} sm={6} md={4} lg={3} xl={2}>
+                            <ProjectCard
+                                project={ project }
+                                onDashboard={ () => onDashboard(project.id) }
+                                onEdit={ () => onUpdate(project.id) }
+                                onDelete={ () => onDelete(project.id) } />
+                        </Grid>
                     ))
                 }
-                <AddMotion onAdd={ onAdd } />
-            </div>
+                <Grid item xs={12} sm={6} md={4} lg={3} xl={2}>
+                    <AddMotion onAdd={ onAdd } />
+                </Grid>
+            </Grid>
         )
     }
 }

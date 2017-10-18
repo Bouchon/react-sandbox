@@ -141,7 +141,9 @@ function createPalette(palette) {
     action: shades[type].action,
     background: shades[type].background,
     getContrastText: getContrastText
-  }, other);
+  }, other, {
+    clone: false // No need to clone deep
+  });
 
   // Dev warnings
   if (process.env.NODE_ENV !== 'production') {

@@ -1,13 +1,20 @@
 import React, { Component } from 'react'
+import ReactDOM from 'react-dom'
 import autobind from 'autobind-decorator'
 
 import Button from 'material-ui/Button'
 import Dialog, { DialogActions, DialogContent, DialogContentText, DialogTitle, } from 'material-ui/Dialog'
 
 export default class AlertDialog extends Component {
+    constructor() {
+    }
+    
+    componentWillUnmount () {
+
+    }
+
     render () {
         const { open, onCancel, onConfirm, title, contentText, cancelText, confirmText } = this.props
-
         return (
             <Dialog open={open} onRequestClose={ onCancel }>
                 <DialogTitle>{ title }</DialogTitle>

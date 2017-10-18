@@ -47,11 +47,11 @@ var babelPluginFlowReactPropTypes_proptype_ElementType = require('react').babelP
 var styles = exports.styles = function styles(theme) {
   return {
     root: (0, _extends3.default)({}, theme.typography.button, {
-      lineHeight: '1em',
+      lineHeight: '1.4em', // Improve readability for multiline button.
       boxSizing: 'border-box',
       minWidth: 88,
       minHeight: 36,
-      padding: '11px ' + theme.spacing.unit * 2 + 'px',
+      padding: theme.spacing.unit + 'px ' + theme.spacing.unit * 2 + 'px',
       borderRadius: 2,
       color: theme.palette.text.primary,
       transition: theme.transitions.create(['background-color', 'box-shadow'], {
@@ -70,7 +70,7 @@ var styles = exports.styles = function styles(theme) {
       }
     }),
     dense: {
-      padding: '10px ' + theme.spacing.unit + 'px',
+      padding: theme.spacing.unit - 1 + 'px ' + theme.spacing.unit + 'px',
       minWidth: 64,
       minHeight: 32,
       fontSize: theme.typography.fontSize - 1

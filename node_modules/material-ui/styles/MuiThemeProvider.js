@@ -48,6 +48,10 @@ var _themeListener = require('./themeListener');
 
 var _themeListener2 = _interopRequireDefault(_themeListener);
 
+var _exactProp = require('../utils/exactProp');
+
+var _exactProp2 = _interopRequireDefault(_exactProp);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var MuiThemeProvider = function (_React$Component) {
@@ -157,4 +161,16 @@ MuiThemeProvider.childContextTypes = (0, _extends3.default)({}, _themeListener2.
 
 MuiThemeProvider.contextTypes = _themeListener2.default.contextTypes;
 
-exports.default = MuiThemeProvider;
+// Add a wrapper component to generate some helper messages in the development
+// environment.
+// eslint-disable-next-line import/no-mutable-exports
+var MuiThemeProviderWrapper = MuiThemeProvider;
+
+if (process.env.NODE_ENV !== 'production') {
+  MuiThemeProviderWrapper = function MuiThemeProviderWrapper(props) {
+    return _react2.default.createElement(MuiThemeProvider, props);
+  };
+  MuiThemeProviderWrapper.propTypes = (0, _exactProp2.default)(MuiThemeProvider.propTypes, 'MuiThemeProvider');
+}
+
+exports.default = MuiThemeProviderWrapper;

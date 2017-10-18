@@ -11,8 +11,7 @@ const css = {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-between',
-        margin: '15px',
-        maxWidth: '300px'
+        height: '194px'
     },
     content: {
         display: 'flex',
@@ -47,7 +46,8 @@ export default class ProjectCardEdit extends Component {
         return (
             <Paper style={ css.paper }>
                 <div style={ css.content }>
-                    <TextField 
+                    <TextField
+                        autoFocus
                         value={ project.name }
                         label='Name'
                         onChange={ event => this.setState({ project: { ...project, name: event.target.value } }) } />

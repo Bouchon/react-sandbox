@@ -11,15 +11,22 @@ const css = {
     paper: {
         display: 'flex',
         flexDirection: 'column',
-        justifyContent: 'space-between',
-        margin: '15px',
-        maxWidth: '300px'
+        justifyContent: 'space-between'
+    },
+    titleContainer: {
+        height: '32px',
+        margin: '15px' 
     },
     title: {
-        padding: '15px',
-        marginBottom: 'auto' 
+        whiteSpace: 'nowrap',
+        overflow: 'hidden',
+        textOverflow: 'ellipsis'
     },
     content: {
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'flex-end',
+        height: '68px',
         padding: '0 15px 15px 15px'
     },
     footer: {
@@ -35,8 +42,8 @@ export default class ProjectCard extends Component {
 
         return (
             <Paper style={ css.paper }>
-                <div style={ css.title }>
-                    <Typography type='headline'><a href='#' onClick={ onDashboard }>{ project.name }</a></Typography>
+                <div style={ css.titleContainer }>
+                    <Typography style={ css.title } type='headline'><a href='#' onClick={ onDashboard }>{ project.name }</a></Typography>
                 </div>
                 <div style={ css.content }>
                     <Typography>{ project.description }</Typography>

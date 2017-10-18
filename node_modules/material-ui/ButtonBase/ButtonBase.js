@@ -118,6 +118,7 @@ var babelPluginFlowReactPropTypes_proptype_Props = {
   onMouseLeave: require('prop-types').func,
   onMouseUp: require('prop-types').func,
   onTouchEnd: require('prop-types').func,
+  onTouchMove: require('prop-types').func,
   onTouchStart: require('prop-types').func,
   role: require('prop-types').string,
   rootRef: require('prop-types').func,
@@ -189,7 +190,7 @@ var ButtonBase = function (_React$Component) {
       if (_this.state.keyboardFocused) {
         event.preventDefault();
       }
-    }), _this.handleTouchStart = (0, _createRippleHandler2.default)(_this, 'TouchStart', 'start'), _this.handleTouchEnd = (0, _createRippleHandler2.default)(_this, 'TouchEnd', 'stop'), _this.handleBlur = (0, _createRippleHandler2.default)(_this, 'Blur', 'stop', function () {
+    }), _this.handleTouchStart = (0, _createRippleHandler2.default)(_this, 'TouchStart', 'start'), _this.handleTouchEnd = (0, _createRippleHandler2.default)(_this, 'TouchEnd', 'stop'), _this.handleTouchMove = (0, _createRippleHandler2.default)(_this, 'TouchEnd', 'stop'), _this.handleBlur = (0, _createRippleHandler2.default)(_this, 'Blur', 'stop', function () {
       _this.setState({ keyboardFocused: false });
     }), _this.handleFocus = function (event) {
       if (_this.props.disabled) {
@@ -276,11 +277,12 @@ var ButtonBase = function (_React$Component) {
           onMouseLeave = _props.onMouseLeave,
           onMouseUp = _props.onMouseUp,
           onTouchEnd = _props.onTouchEnd,
+          onTouchMove = _props.onTouchMove,
           onTouchStart = _props.onTouchStart,
           rootRef = _props.rootRef,
           tabIndex = _props.tabIndex,
           type = _props.type,
-          other = (0, _objectWithoutProperties3.default)(_props, ['centerRipple', 'children', 'classes', 'className', 'component', 'disabled', 'disableRipple', 'focusRipple', 'keyboardFocusedClassName', 'onBlur', 'onFocus', 'onKeyboardFocus', 'onKeyDown', 'onKeyUp', 'onMouseDown', 'onMouseLeave', 'onMouseUp', 'onTouchEnd', 'onTouchStart', 'rootRef', 'tabIndex', 'type']);
+          other = (0, _objectWithoutProperties3.default)(_props, ['centerRipple', 'children', 'classes', 'className', 'component', 'disabled', 'disableRipple', 'focusRipple', 'keyboardFocusedClassName', 'onBlur', 'onFocus', 'onKeyboardFocus', 'onKeyDown', 'onKeyUp', 'onMouseDown', 'onMouseLeave', 'onMouseUp', 'onTouchEnd', 'onTouchMove', 'onTouchStart', 'rootRef', 'tabIndex', 'type']);
 
 
       var className = (0, _classnames2.default)(classes.root, (_classNames = {}, (0, _defineProperty3.default)(_classNames, classes.disabled, disabled), (0, _defineProperty3.default)(_classNames, keyboardFocusedClassName || '', this.state.keyboardFocused), _classNames), classNameProp);
@@ -317,6 +319,7 @@ var ButtonBase = function (_React$Component) {
           onMouseLeave: this.handleMouseLeave,
           onMouseUp: this.handleMouseUp,
           onTouchEnd: this.handleTouchEnd,
+          onTouchMove: this.handleTouchMove,
           onTouchStart: this.handleTouchStart,
           ref: rootRef,
           tabIndex: disabled ? -1 : tabIndex,

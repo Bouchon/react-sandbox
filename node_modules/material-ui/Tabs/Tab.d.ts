@@ -5,7 +5,7 @@ import { ButtonBaseProps } from '../ButtonBase';
 export type TabProps = {
   disabled?: boolean;
   fullWidth?: boolean;
-  icon?: React.ReactNode;
+  icon?: string | React.ReactElement<any>;
   value?: any;
   label?: React.ReactNode;
   onChange?: (
@@ -16,7 +16,7 @@ export type TabProps = {
   selected?: boolean;
   style?: object;
   textColor?: string | 'accent' | 'primary' | 'inherit';
-} & Partial<Omit<ButtonBaseProps, 'onChange'>>;
+} & Omit<ButtonBaseProps, 'onChange'>;
 
 export type TabClassKey =
   | 'root'

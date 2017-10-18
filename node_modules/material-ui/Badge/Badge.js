@@ -43,7 +43,7 @@ var styles = exports.styles = function styles(theme) {
   return {
     root: {
       position: 'relative',
-      display: 'inline-block'
+      display: 'inline-flex'
     },
     badge: {
       display: 'flex',
@@ -62,7 +62,8 @@ var styles = exports.styles = function styles(theme) {
       height: RADIUS * 2,
       borderRadius: '50%',
       backgroundColor: theme.palette.color,
-      color: theme.palette.textColor
+      color: theme.palette.textColor,
+      zIndex: 1 // Render the badge on top of potential ripples.
     },
     colorPrimary: {
       backgroundColor: theme.palette.primary[500],

@@ -15,9 +15,7 @@ const css = {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        width: '225px',
         height: '194px',
-        margin: '15px',
         overflow: 'hidden',
         borderRadius: '3px',
         backgroundColor: 'rgba(0, 0, 0, 0.05)'

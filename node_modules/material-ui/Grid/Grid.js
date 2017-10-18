@@ -149,17 +149,32 @@ var styles = exports.styles = function styles(theme) {
     'wrap-xs-nowrap': {
       flexWrap: 'nowrap'
     },
-    'align-xs-center': {
+    'align-items-xs-center': {
       alignItems: 'center'
     },
-    'align-xs-flex-start': {
+    'align-items-xs-flex-start': {
       alignItems: 'flex-start'
     },
-    'align-xs-flex-end': {
+    'align-items-xs-flex-end': {
       alignItems: 'flex-end'
     },
-    'align-xs-baseline': {
+    'align-items-xs-baseline': {
       alignItems: 'baseline'
+    },
+    'align-content-xs-center': {
+      alignContent: 'center'
+    },
+    'align-content-xs-flex-start': {
+      alignContent: 'flex-start'
+    },
+    'align-content-xs-flex-end': {
+      alignContent: 'flex-end'
+    },
+    'align-content-xs-space-between': {
+      alignContent: 'space-between'
+    },
+    'align-content-xs-space-around': {
+      alignContent: 'space-around'
     },
     'justify-xs-center': {
       justifyContent: 'center'
@@ -189,7 +204,8 @@ var babelPluginFlowReactPropTypes_proptype_Props = {
   component: typeof babelPluginFlowReactPropTypes_proptype_ElementType === 'function' ? babelPluginFlowReactPropTypes_proptype_ElementType : require('prop-types').shape(babelPluginFlowReactPropTypes_proptype_ElementType),
   container: require('prop-types').bool,
   item: require('prop-types').bool,
-  align: require('prop-types').oneOf(['flex-start', 'center', 'flex-end', 'stretch', 'baseline']),
+  alignContent: require('prop-types').oneOf(['stretch', 'center', 'flex-start', 'flex-end', 'space-between', 'space-around']),
+  alignItems: require('prop-types').oneOf(['flex-start', 'center', 'flex-end', 'stretch', 'baseline']),
   direction: require('prop-types').oneOf(['row', 'row-reverse', 'column', 'column-reverse']),
   spacing: require('prop-types').oneOf([0, 8, 16, 24, 40]),
   hidden: typeof babelPluginFlowReactPropTypes_proptype_HiddenProps === 'function' ? babelPluginFlowReactPropTypes_proptype_HiddenProps : require('prop-types').shape(babelPluginFlowReactPropTypes_proptype_HiddenProps),
@@ -211,7 +227,8 @@ function Grid(props) {
       ComponentProp = props.component,
       container = props.container,
       item = props.item,
-      align = props.align,
+      alignContent = props.alignContent,
+      alignItems = props.alignItems,
       direction = props.direction,
       spacing = props.spacing,
       hidden = props.hidden,
@@ -222,10 +239,10 @@ function Grid(props) {
       md = props.md,
       lg = props.lg,
       xl = props.xl,
-      other = (0, _objectWithoutProperties3.default)(props, ['classes', 'className', 'component', 'container', 'item', 'align', 'direction', 'spacing', 'hidden', 'justify', 'wrap', 'xs', 'sm', 'md', 'lg', 'xl']);
+      other = (0, _objectWithoutProperties3.default)(props, ['classes', 'className', 'component', 'container', 'item', 'alignContent', 'alignItems', 'direction', 'spacing', 'hidden', 'justify', 'wrap', 'xs', 'sm', 'md', 'lg', 'xl']);
 
 
-  var className = (0, _classnames2.default)((_classNames = {}, (0, _defineProperty3.default)(_classNames, classes.typeContainer, container), (0, _defineProperty3.default)(_classNames, classes.typeItem, item), (0, _defineProperty3.default)(_classNames, classes['spacing-xs-' + String(spacing)], container && spacing !== 0), (0, _defineProperty3.default)(_classNames, classes['direction-xs-' + String(direction)], direction !== Grid.defaultProps.direction), (0, _defineProperty3.default)(_classNames, classes['wrap-xs-' + String(wrap)], wrap !== Grid.defaultProps.wrap), (0, _defineProperty3.default)(_classNames, classes['align-xs-' + String(align)], align !== Grid.defaultProps.align), (0, _defineProperty3.default)(_classNames, classes['justify-xs-' + String(justify)], justify !== Grid.defaultProps.justify), (0, _defineProperty3.default)(_classNames, classes['grid-xs'], xs === true), (0, _defineProperty3.default)(_classNames, classes['grid-xs-' + String(xs)], xs && xs !== true), (0, _defineProperty3.default)(_classNames, classes['grid-sm'], sm === true), (0, _defineProperty3.default)(_classNames, classes['grid-sm-' + String(sm)], sm && sm !== true), (0, _defineProperty3.default)(_classNames, classes['grid-md'], md === true), (0, _defineProperty3.default)(_classNames, classes['grid-md-' + String(md)], md && md !== true), (0, _defineProperty3.default)(_classNames, classes['grid-lg'], lg === true), (0, _defineProperty3.default)(_classNames, classes['grid-lg-' + String(lg)], lg && lg !== true), (0, _defineProperty3.default)(_classNames, classes['grid-xl'], xl === true), (0, _defineProperty3.default)(_classNames, classes['grid-xl-' + String(xl)], xl && xl !== true), _classNames), classNameProp);
+  var className = (0, _classnames2.default)((_classNames = {}, (0, _defineProperty3.default)(_classNames, classes.typeContainer, container), (0, _defineProperty3.default)(_classNames, classes.typeItem, item), (0, _defineProperty3.default)(_classNames, classes['spacing-xs-' + String(spacing)], container && spacing !== 0), (0, _defineProperty3.default)(_classNames, classes['direction-xs-' + String(direction)], direction !== Grid.defaultProps.direction), (0, _defineProperty3.default)(_classNames, classes['wrap-xs-' + String(wrap)], wrap !== Grid.defaultProps.wrap), (0, _defineProperty3.default)(_classNames, classes['align-items-xs-' + String(alignItems)], alignItems !== Grid.defaultProps.alignItems), (0, _defineProperty3.default)(_classNames, classes['align-content-xs-' + String(alignContent)], alignContent !== Grid.defaultProps.alignContent), (0, _defineProperty3.default)(_classNames, classes['justify-xs-' + String(justify)], justify !== Grid.defaultProps.justify), (0, _defineProperty3.default)(_classNames, classes['grid-xs'], xs === true), (0, _defineProperty3.default)(_classNames, classes['grid-xs-' + String(xs)], xs && xs !== true), (0, _defineProperty3.default)(_classNames, classes['grid-sm'], sm === true), (0, _defineProperty3.default)(_classNames, classes['grid-sm-' + String(sm)], sm && sm !== true), (0, _defineProperty3.default)(_classNames, classes['grid-md'], md === true), (0, _defineProperty3.default)(_classNames, classes['grid-md-' + String(md)], md && md !== true), (0, _defineProperty3.default)(_classNames, classes['grid-lg'], lg === true), (0, _defineProperty3.default)(_classNames, classes['grid-lg-' + String(lg)], lg && lg !== true), (0, _defineProperty3.default)(_classNames, classes['grid-xl'], xl === true), (0, _defineProperty3.default)(_classNames, classes['grid-xl-' + String(xl)], xl && xl !== true), _classNames), classNameProp);
   var gridProps = (0, _extends3.default)({ className: className }, other);
 
   if (hidden) {
@@ -243,9 +260,10 @@ Grid.propTypes = process.env.NODE_ENV !== "production" ? (_ref = {
   classes: require('prop-types').object.isRequired,
   component: typeof babelPluginFlowReactPropTypes_proptype_ElementType === 'function' ? babelPluginFlowReactPropTypes_proptype_ElementType.isRequired ? babelPluginFlowReactPropTypes_proptype_ElementType.isRequired : babelPluginFlowReactPropTypes_proptype_ElementType : require('prop-types').shape(babelPluginFlowReactPropTypes_proptype_ElementType).isRequired,
   children: typeof babelPluginFlowReactPropTypes_proptype_Node === 'function' ? babelPluginFlowReactPropTypes_proptype_Node : require('prop-types').shape(babelPluginFlowReactPropTypes_proptype_Node)
-}, (0, _defineProperty3.default)(_ref, 'classes', require('prop-types').object), (0, _defineProperty3.default)(_ref, 'className', require('prop-types').string), (0, _defineProperty3.default)(_ref, 'component', typeof babelPluginFlowReactPropTypes_proptype_ElementType === 'function' ? babelPluginFlowReactPropTypes_proptype_ElementType : require('prop-types').shape(babelPluginFlowReactPropTypes_proptype_ElementType)), (0, _defineProperty3.default)(_ref, 'container', require('prop-types').bool), (0, _defineProperty3.default)(_ref, 'item', require('prop-types').bool), (0, _defineProperty3.default)(_ref, 'align', require('prop-types').oneOf(['flex-start', 'center', 'flex-end', 'stretch', 'baseline'])), (0, _defineProperty3.default)(_ref, 'direction', require('prop-types').oneOf(['row', 'row-reverse', 'column', 'column-reverse'])), (0, _defineProperty3.default)(_ref, 'spacing', require('prop-types').oneOf([0, 8, 16, 24, 40])), (0, _defineProperty3.default)(_ref, 'hidden', typeof babelPluginFlowReactPropTypes_proptype_HiddenProps === 'function' ? babelPluginFlowReactPropTypes_proptype_HiddenProps : require('prop-types').shape(babelPluginFlowReactPropTypes_proptype_HiddenProps)), (0, _defineProperty3.default)(_ref, 'justify', require('prop-types').oneOf(['flex-start', 'center', 'flex-end', 'space-between', 'space-around'])), (0, _defineProperty3.default)(_ref, 'wrap', require('prop-types').oneOf(['nowrap', 'wrap', 'wrap-reverse'])), (0, _defineProperty3.default)(_ref, 'xs', require('prop-types').oneOfType([require('prop-types').bool, require('prop-types').oneOf([1]), require('prop-types').oneOf([2]), require('prop-types').oneOf([3]), require('prop-types').oneOf([4]), require('prop-types').oneOf([5]), require('prop-types').oneOf([6]), require('prop-types').oneOf([7]), require('prop-types').oneOf([8]), require('prop-types').oneOf([9]), require('prop-types').oneOf([10]), require('prop-types').oneOf([11]), require('prop-types').oneOf([12])])), (0, _defineProperty3.default)(_ref, 'sm', require('prop-types').oneOfType([require('prop-types').bool, require('prop-types').oneOf([1]), require('prop-types').oneOf([2]), require('prop-types').oneOf([3]), require('prop-types').oneOf([4]), require('prop-types').oneOf([5]), require('prop-types').oneOf([6]), require('prop-types').oneOf([7]), require('prop-types').oneOf([8]), require('prop-types').oneOf([9]), require('prop-types').oneOf([10]), require('prop-types').oneOf([11]), require('prop-types').oneOf([12])])), (0, _defineProperty3.default)(_ref, 'md', require('prop-types').oneOfType([require('prop-types').bool, require('prop-types').oneOf([1]), require('prop-types').oneOf([2]), require('prop-types').oneOf([3]), require('prop-types').oneOf([4]), require('prop-types').oneOf([5]), require('prop-types').oneOf([6]), require('prop-types').oneOf([7]), require('prop-types').oneOf([8]), require('prop-types').oneOf([9]), require('prop-types').oneOf([10]), require('prop-types').oneOf([11]), require('prop-types').oneOf([12])])), (0, _defineProperty3.default)(_ref, 'lg', require('prop-types').oneOfType([require('prop-types').bool, require('prop-types').oneOf([1]), require('prop-types').oneOf([2]), require('prop-types').oneOf([3]), require('prop-types').oneOf([4]), require('prop-types').oneOf([5]), require('prop-types').oneOf([6]), require('prop-types').oneOf([7]), require('prop-types').oneOf([8]), require('prop-types').oneOf([9]), require('prop-types').oneOf([10]), require('prop-types').oneOf([11]), require('prop-types').oneOf([12])])), (0, _defineProperty3.default)(_ref, 'xl', require('prop-types').oneOfType([require('prop-types').bool, require('prop-types').oneOf([1]), require('prop-types').oneOf([2]), require('prop-types').oneOf([3]), require('prop-types').oneOf([4]), require('prop-types').oneOf([5]), require('prop-types').oneOf([6]), require('prop-types').oneOf([7]), require('prop-types').oneOf([8]), require('prop-types').oneOf([9]), require('prop-types').oneOf([10]), require('prop-types').oneOf([11]), require('prop-types').oneOf([12])])), _ref) : {};
+}, (0, _defineProperty3.default)(_ref, 'classes', require('prop-types').object), (0, _defineProperty3.default)(_ref, 'className', require('prop-types').string), (0, _defineProperty3.default)(_ref, 'component', typeof babelPluginFlowReactPropTypes_proptype_ElementType === 'function' ? babelPluginFlowReactPropTypes_proptype_ElementType : require('prop-types').shape(babelPluginFlowReactPropTypes_proptype_ElementType)), (0, _defineProperty3.default)(_ref, 'container', require('prop-types').bool), (0, _defineProperty3.default)(_ref, 'item', require('prop-types').bool), (0, _defineProperty3.default)(_ref, 'alignContent', require('prop-types').oneOf(['stretch', 'center', 'flex-start', 'flex-end', 'space-between', 'space-around'])), (0, _defineProperty3.default)(_ref, 'alignItems', require('prop-types').oneOf(['flex-start', 'center', 'flex-end', 'stretch', 'baseline'])), (0, _defineProperty3.default)(_ref, 'direction', require('prop-types').oneOf(['row', 'row-reverse', 'column', 'column-reverse'])), (0, _defineProperty3.default)(_ref, 'spacing', require('prop-types').oneOf([0, 8, 16, 24, 40])), (0, _defineProperty3.default)(_ref, 'hidden', typeof babelPluginFlowReactPropTypes_proptype_HiddenProps === 'function' ? babelPluginFlowReactPropTypes_proptype_HiddenProps : require('prop-types').shape(babelPluginFlowReactPropTypes_proptype_HiddenProps)), (0, _defineProperty3.default)(_ref, 'justify', require('prop-types').oneOf(['flex-start', 'center', 'flex-end', 'space-between', 'space-around'])), (0, _defineProperty3.default)(_ref, 'wrap', require('prop-types').oneOf(['nowrap', 'wrap', 'wrap-reverse'])), (0, _defineProperty3.default)(_ref, 'xs', require('prop-types').oneOfType([require('prop-types').bool, require('prop-types').oneOf([1]), require('prop-types').oneOf([2]), require('prop-types').oneOf([3]), require('prop-types').oneOf([4]), require('prop-types').oneOf([5]), require('prop-types').oneOf([6]), require('prop-types').oneOf([7]), require('prop-types').oneOf([8]), require('prop-types').oneOf([9]), require('prop-types').oneOf([10]), require('prop-types').oneOf([11]), require('prop-types').oneOf([12])])), (0, _defineProperty3.default)(_ref, 'sm', require('prop-types').oneOfType([require('prop-types').bool, require('prop-types').oneOf([1]), require('prop-types').oneOf([2]), require('prop-types').oneOf([3]), require('prop-types').oneOf([4]), require('prop-types').oneOf([5]), require('prop-types').oneOf([6]), require('prop-types').oneOf([7]), require('prop-types').oneOf([8]), require('prop-types').oneOf([9]), require('prop-types').oneOf([10]), require('prop-types').oneOf([11]), require('prop-types').oneOf([12])])), (0, _defineProperty3.default)(_ref, 'md', require('prop-types').oneOfType([require('prop-types').bool, require('prop-types').oneOf([1]), require('prop-types').oneOf([2]), require('prop-types').oneOf([3]), require('prop-types').oneOf([4]), require('prop-types').oneOf([5]), require('prop-types').oneOf([6]), require('prop-types').oneOf([7]), require('prop-types').oneOf([8]), require('prop-types').oneOf([9]), require('prop-types').oneOf([10]), require('prop-types').oneOf([11]), require('prop-types').oneOf([12])])), (0, _defineProperty3.default)(_ref, 'lg', require('prop-types').oneOfType([require('prop-types').bool, require('prop-types').oneOf([1]), require('prop-types').oneOf([2]), require('prop-types').oneOf([3]), require('prop-types').oneOf([4]), require('prop-types').oneOf([5]), require('prop-types').oneOf([6]), require('prop-types').oneOf([7]), require('prop-types').oneOf([8]), require('prop-types').oneOf([9]), require('prop-types').oneOf([10]), require('prop-types').oneOf([11]), require('prop-types').oneOf([12])])), (0, _defineProperty3.default)(_ref, 'xl', require('prop-types').oneOfType([require('prop-types').bool, require('prop-types').oneOf([1]), require('prop-types').oneOf([2]), require('prop-types').oneOf([3]), require('prop-types').oneOf([4]), require('prop-types').oneOf([5]), require('prop-types').oneOf([6]), require('prop-types').oneOf([7]), require('prop-types').oneOf([8]), require('prop-types').oneOf([9]), require('prop-types').oneOf([10]), require('prop-types').oneOf([11]), require('prop-types').oneOf([12])])), _ref) : {};
 Grid.defaultProps = {
-  align: 'stretch',
+  alignContent: 'stretch',
+  alignItems: 'stretch',
   component: 'div',
   container: false,
   direction: 'row',
@@ -258,7 +276,8 @@ Grid.defaultProps = {
 
 // Add a wrapper component to generate some helper messages in the development
 // environment.
-var GridWrapper = Grid; // eslint-disable-line import/no-mutable-exports
+// eslint-disable-next-line import/no-mutable-exports
+var GridWrapper = Grid;
 
 if (process.env.NODE_ENV !== 'production') {
   var requireProp = (0, _requirePropFactory2.default)('Grid');
@@ -269,7 +288,8 @@ if (process.env.NODE_ENV !== 'production') {
 
   // $FlowFixMe - cannot mix legacy propTypes with current HOC pattern - https://github.com/facebook/flow/issues/4644#issuecomment-332530909
   GridWrapper.propTypes = {
-    align: requireProp('container'),
+    alignContent: requireProp('container'),
+    alignItems: requireProp('container'),
     direction: requireProp('container'),
     justify: requireProp('container'),
     lg: requireProp('item'),

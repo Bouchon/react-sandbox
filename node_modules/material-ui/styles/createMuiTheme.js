@@ -78,9 +78,7 @@ function createMuiTheme() {
     transitions: _transitions2.default,
     spacing: _spacing2.default,
     zIndex: _zIndex2.default
-  }, other, {
-    clone: true // We don't want to mutate the input
-  }));
+  }, other));
 }
 
 exports.default = createMuiTheme;
