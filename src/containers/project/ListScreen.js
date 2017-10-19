@@ -14,6 +14,12 @@ import List from '../../components/project/List'
 import Cards from '../../components/project/Cards'
 import Hero from '../../components/common/Hero'
 
+import FadeMotion from '../../components/common/FadeMotion'
+import CardMotion from '../../components/common/CardMotion'
+import { presets } from 'react-motion'
+import ProjectCard from '../../components/project/ProjectCard' 
+import ProjectMotion from '../../components/project/ProjectMotion'
+
 const css = {
     page: { padding: '24px' }
 }
@@ -26,7 +32,10 @@ class ListScreen extends Component {
             onAdd: false, 
             onUpdate: false, 
             onDashboard: false,
-            projectId: null
+            projectId: null,
+
+            opacity: 1,
+            toggle: false
         }
     }
 
@@ -56,6 +65,35 @@ class ListScreen extends Component {
                         onDashboard={ id => this.setState({ onDashboard: true, projectId: id })} />
                 }
                 </div>
+                
+                <div style={{display: 'flex'}}>
+                    <div style={{ width: '30%', height: '194px', margin: 'auto' }}>
+                            <FadeMotion opacity={ this.state.opacity } destroy destroyThreshold={.2}>
+                                <ProjectCard project={ Object.values(projects)[0] } />
+                            </FadeMotion>
+                    </div>
+                    <div style={{ width: '194px', height: '194px', margin: 'auto' }}>
+                        <FadeMotion opacity={ this.state.opacity } destroy destroyThreshold={.2}>
+                            <CardMotion
+                                preset={presets.stiff}
+                                toggle={this.state.toggle}
+                                minSize={48}
+                                maxSize={275}
+                                top='50%'
+                                left='50%'>                        
+                                <ProjectCard project={ Object.values(projects)[0] } />
+                            </CardMotion>
+                        </FadeMotion>
+                    </div>
+                </div>
+
+                <Button onClick={ () => this.setState({ 
+                    opacity: this.state.opacity === 0 ? 1 : 0,
+                    toggle: !this.state.toggle
+                }) }>toggle</Button>
+
+                <ProjectMotion project={ Object.values(projects)[0] } />
+
                 <AlertDialog
                     open={ this.state.dialogOpen }
                     onCancel={ () => this.setState({ dialogOpen: false }) }
