@@ -7,8 +7,11 @@ import IconButton from 'material-ui/IconButton'
 import ModeEditIcon from 'material-ui-icons/ModeEdit'
 import DeleteIcon from 'material-ui-icons/Delete'
 
+import EditMotion from './EditMotion'
+
 const css = {
     paper: {
+        position: 'relative',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-between'
@@ -52,8 +55,8 @@ export default class ProjectCard extends Component {
                     <Typography type='caption'>Members (0)</Typography>
                 </div>
                 <div style={ css.footer }>
-                    <IconButton onClick={ onDelete }><DeleteIcon /></IconButton>
-                    <IconButton onClick={ onEdit }><ModeEditIcon /></IconButton>
+                    <IconButton style={{ marginRight: '48px' }}onClick={ onDelete }><DeleteIcon /></IconButton>
+                    <EditMotion project={ project } onEdit={ onEdit } />
                 </div>
             </Paper>
         )

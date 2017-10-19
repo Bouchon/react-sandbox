@@ -12,8 +12,10 @@ const css = {
         alignItems: 'center'
     },
     header: {
-        padding: '15px 24px',
-        position: 'relative'
+        padding: '0 24px',
+        position: 'relative',
+        borderBottom: 'solid 1px #eee'
+
     },
     fab: { 
         position: 'absolute', 
@@ -57,12 +59,12 @@ export default class Hero extends Component {
         })
 
         return (
-            <Paper square style={ css.header }>
+            <div style={ css.header }>
                 <div style={ css.flex }>
                     { breadCrumbs }
                 </div>
                 { button }
-            </Paper>
+            </div>
         )
     }
 }
