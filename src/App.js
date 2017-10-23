@@ -12,7 +12,8 @@ import ProjectListScreen from './containers/project/ListScreen'
 import ProjectAddOrUpdateScreen from './containers/project/AddOrUpdateScreen'
 import ProjectDashboardScreen from './containers/project/DashboardScreen'
 
-import TaskListScreen from './containers/task/ListScreen'
+//import TaskListScreen from './containers/task/ListScreen'
+import ProjectTasksScreen from './containers/task/ProjectTasksScreen'
 
 class App extends Component {
     render () {
@@ -28,7 +29,7 @@ class App extends Component {
                         <Route exact path='/project/:id/edit' component={ProjectAddOrUpdateScreen} />
                         <Route exact path='/project/:id/dashboard/' component={ProjectDashboardScreen} />
 
-                        <Route exact path='/project/:id/task/list' component={TaskListScreen} />
+                        <Route exact path='/project/:id/task/list' component={ProjectTasksScreen} />
                         
                         <Route exact path='/react-motion' component={ReactMotionScreen} />
                     </div>
