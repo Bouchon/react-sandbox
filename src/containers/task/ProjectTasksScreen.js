@@ -18,7 +18,7 @@ import CloseIcon from 'material-ui-icons/Close'
 import CheckIcon from 'material-ui-icons/Check'
 
 import Hero from '../../components/common/Hero'
-import { addTask, updateTask, deleteTask } from '../../action-creators/tasks'
+import { deleteTask } from '../../action-creators/tasks'
 
 const status = [ 'NEW', 'TODO', 'WIP', 'DONE' ]
 
@@ -39,7 +39,7 @@ class ProjectTasksScreen extends Component {
             return <Redirect to={ redirect } />
         }
 
-        const { projects, tasks, addTask, updateTask, deleteTask } = this.props
+        const { projects, tasks, deleteTask } = this.props
         const projectId = parseInt(this.props.match.params.id)
         const project = projects[projectId]
         const projectTasks = Object.values(tasks).filter(t => t.projectId === projectId && (search === '' || search !== '' && t.name.toLowerCase().includes(search.toLowerCase())))
@@ -57,7 +57,7 @@ class ProjectTasksScreen extends Component {
                 <Typography type='title' style={{ marginRight: 'auto' }}>{ projectTasks.length } Tasks</Typography>
                 <TextField value={ search } placeholder='search' onChange={ (event) => this.setState({ search: event.target.value }) } />
                 <IconButton><SearchIcon /></IconButton>
-                <IconButton onClick={ () => addTask({ projectId, name: 'New task', status: status[0] }) }><AddIcon /></IconButton>
+                <IconButton onClick={ () => this.setState({ redirect: '/project/' + projectId + '/task/add' }) }><AddIcon /></IconButton>
             </Toolbar> ) :
         (
             <Toolbar style={{ backgroundColor: 'pink' }}>
@@ -98,15 +98,12 @@ class ProjectTasksScreen extends Component {
                                         else selection.splice(selection.indexOf(task.id), 1)
                                         this.setState({ selection }) 
                                     } } /></TableCell>
-                                    <TableCell><TextField value={ task.name } onChange={ (event) => updateTask({ ...task, name: event.target.value }) } /></TableCell>
-                                    <TableCell>
-                                        <TextField select value={ task.status } onChange={ (event) => updateTask({ ...task, status: event.target.value }) }>
-                                            { status.map(option => <MenuItem key={option} value={option}>{option}</MenuItem> )}
-                                        </TextField>
-                                    </TableCell>
-                                    <TableCell>{ task.begin }   <IconButton><ModeEditIcon style={{ fontSize: '13px' }} /></IconButton></TableCell>
-                                    <TableCell>{ task.end }     <IconButton><ModeEditIcon style={{ fontSize: '13px' }} /></IconButton></TableCell>
-                                    <TableCell>{ task.created } <IconButton><ModeEditIcon style={{ fontSize: '13px' }} /></IconButton></TableCell>
+                                    <TableCell>{ task.name }</TableCell>
+                                    <TableCell>{ task.status }</TableCell>
+                                    <TableCell>{ task.begin }</TableCell>
+                                    <TableCell>{ task.end }</TableCell>
+                                    <TableCell>{ task.created }</TableCell>
+                                    <TableCell><IconButton onClick={ () => this.setState({ redirect: '/project/' + projectId + '/task/' + task.id + '/edit' }) }><ModeEditIcon /></IconButton></TableCell>
                                 </TableRow>
                             )
                         }) }
@@ -119,4 +116,4 @@ class ProjectTasksScreen extends Component {
 
 const mapStateToProps = ({ projects, tasks }) => ({ projects, tasks })
 
-export default connect(mapStateToProps, { addTask, updateTask, deleteTask })(ProjectTasksScreen)
+export default connect(mapStateToProps, { deleteTask })(ProjectTasksScreen)
