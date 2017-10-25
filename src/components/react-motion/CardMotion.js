@@ -73,7 +73,9 @@ export default class CardMotion extends Component {
         return (
             <div>
                 <Paper style={ css.paper } onClick={ (event) => this.setState({ toggleCircle: !toggleCircle, circleX: event.clientX, circleY: event.clientY }) }>
-                <CircleTransition color='pink' clientX={circleX} clientY={circleY} toggle={ toggleCircle } />
+                    <CircleTransition color='rgba(0, 0, 255, .3)' clientX={circleX} clientY={circleY} toggle={ toggleCircle } />
+                    <CircleTransition color='rgba(255, 0, 0, .3)' clientX={300} clientY={300} toggle={ toggleCircle } />
+                    <CircleTransition color='rgba(0, 255, 0, .3)' clientX={400} clientY={400} toggle={ toggleCircle } />
                 </Paper>
 
                 <Button raised onClick={ () => this.setState({ toggleCircle: !toggleCircle }) }>{ toggleCircle.toString() }</Button>
