@@ -5,8 +5,10 @@ import autobind from 'autobind-decorator'
 import Paper from 'material-ui/Paper'
 import Button from 'material-ui/Button'
 
+import CircleTransition from './CircleTransition'
+
 const css = {
-    paper: { margin: '50px', width: '300px', height: '200px' },
+    paper: { margin: '50px', padding: '15px', width: '600px', height: '200px' },
     circle: { position: 'absolute', borderRadius: '50%',  backgroundColor: 'pink' },
     absolute: { position: 'absolute', width: '100%', height: '100%' },
     relative: { position: 'relative', width: '100%', height: '100%' }
@@ -59,59 +61,22 @@ export default class CardMotion extends Component {
     constructor () {
         super()
         this.state = { 
-            motion: {
-                circleSize: 0,
-                opacity: 0,
-                circleX: 0,
-                circleY: 0
-            }
+            toggleCircle: false,
+            circleX: 0, circleY: 0
         }
     }
 
-    @autobind
-    toggle (event) {
-        const target = event.currentTarget.getBoundingClientRect()
-        const { motion } = this.state
-        this.setState({
-            motion: {
-                circleX: motion.circleSize === 0 ? event.clientX - target.x : motion.circleX,
-                circleY: motion.circleSize === 0 ? event.clientY - target.y : motion.circleY,
-                circleSize: motion.circleSize === 0 ? 300 : 0,
-                opacity: motion.opacity === 0 ? 1 : 0
-            }
-        })
-    }
-
     render () {
-        const { motion } = this.state
+        const { toggleCircle, circleX, circleY } = this.state
         const circleMotion = { size: { start: 0, end: 300 } }
 
         return (
             <div>
-                <Paper style={ css.paper } onClick={ (event) => { this.toggle(event); } }>
-                    <Motion style={{ x: spring(motion.circleSize, presets.stiff), o: spring(motion.opacity) }}>
-                    { value => {                   
-                        return (
-                            <div style={{ width: '100%', height: '100%', position: 'relative', overflow: 'hidden' }}>
-                                
-                                <div style={ css.absolute }>
-                                    <div style={ { ...css.relative, backgroundColor: 'cyan', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'space-between' } }>
-                                        <p>Text 1</p>
-                                        <Button>toggle</Button>
-                                        <p><b>Footer</b></p>
-                                    </div>
-                                </div>
-
-                                <div style={ css.absolute }>
-                                    <Circle radius={ value.x } target={ motion.circleSize } x={motion.circleX} y={motion.circleY}></Circle>
-                                </div>
-                            </div> 
-                        ) 
-                    } }
-                    </Motion>               
+                <Paper style={ css.paper } onClick={ (event) => this.setState({ toggleCircle: !toggleCircle, circleX: event.clientX, circleY: event.clientY }) }>
+                <CircleTransition color='pink' clientX={circleX} clientY={circleY} toggle={ toggleCircle } />
                 </Paper>
 
-                <Button raised onClick={ this.toggle }>{ motion.circleSize }</Button>
+                <Button raised onClick={ () => this.setState({ toggleCircle: !toggleCircle }) }>{ toggleCircle.toString() }</Button>
             </div>
         )
     }
