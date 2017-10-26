@@ -12,12 +12,14 @@ import ExitToAppIcon from 'material-ui-icons/ExitToApp'
 import { logOut } from '../action-creators/login'
 import LeftNavigation from './LeftNavigation'
 
+import CircleTransition from './react-motion/CircleTransition'
+
 const css = { title: { flex: 1 } }
 
 class ApplicationBar extends Component {
     constructor () {
         super()
-        this.state = { leftNavigationOpen: false }
+        this.state = { leftNavigationOpen: false, toggleCircle: false }
     }
 
     render () {
@@ -25,6 +27,7 @@ class ApplicationBar extends Component {
 
         return (
             <AppBar position='static'>
+                <CircleTransition color='rgba(255, 0, 0, .3)' x={165} y={115} toggle={ this.state.toggleCircle } />
                 <Toolbar>
                     <Hidden lgUp>
                         <IconButton

@@ -1,14 +1,18 @@
 import React, { Component } from 'react'
-import { Motion, spring, presets } from 'react-motion'
+import { presets } from 'react-motion'
 import autobind from 'autobind-decorator'
 
 import Paper from 'material-ui/Paper'
 import Button from 'material-ui/Button'
+import IconButton from 'material-ui/IconButton'
+import ExitToAppIcon from 'material-ui-icons/ExitToApp'
 
 import CircleTransition from './CircleTransition'
+import FadeTransition from './FadeTransition'
+import RadialTransform from '../motions/RadialTransform'
 
 const css = {
-    paper: { margin: '50px', padding: '15px', width: '600px', height: '200px' },
+    paper: { margin: '50px', padding: '15px', width: '100px', height: '100px' },
     circle: { position: 'absolute', borderRadius: '50%',  backgroundColor: 'pink' },
     absolute: { position: 'absolute', width: '100%', height: '100%' },
     relative: { position: 'relative', width: '100%', height: '100%' }
@@ -66,18 +70,47 @@ export default class CardMotion extends Component {
         }
     }
 
+    onClickPaper (event) {
+        const box = event.currentTarget.getBoundingClientRect()
+        this.setState({
+            toggleCircle: !this.state.toggleCircle,
+            circleX: event.clientX - box.x,
+            circleY: event.clientY - box.y
+        })
+    }
+
     render () {
         const { toggleCircle, circleX, circleY } = this.state
         const circleMotion = { size: { start: 0, end: 300 } }
 
         return (
             <div>
-                <Paper style={ css.paper } onClick={ (event) => this.setState({ toggleCircle: !toggleCircle, circleX: event.clientX, circleY: event.clientY }) }>
-                    <CircleTransition color='rgba(0, 0, 255, .3)' clientX={circleX} clientY={circleY} toggle={ toggleCircle } />
-                    <CircleTransition color='rgba(255, 0, 0, .3)' clientX={300} clientY={300} toggle={ toggleCircle } />
-                    <CircleTransition color='rgba(0, 255, 0, .3)' clientX={400} clientY={400} toggle={ toggleCircle } />
+                <Paper style={ css.paper } onClick={ (event) => this.onClickPaper(event) }>
+                    <FadeTransition toggle={ !toggleCircle } preset={ presets.gentle }>
+                        <p>Test</p>
+                        <IconButton onClick={ () => console.log('click') }>
+                            <ExitToAppIcon />
+                        </IconButton>   
+                    </FadeTransition>
+                    <CircleTransition 
+                        preset={ presets.stiff }
+                        color='pink'
+                        x={circleX} 
+                        y={circleY} 
+                        toggle={ toggleCircle } />
+                    <FadeTransition toggle={ toggleCircle }>
+                        <p>Yeah!!</p>
+                        <Button>Click me !</Button>  
+                    </FadeTransition>
                 </Paper>
 
+                <div style={{ width: '500px', height: '500px', margin: '30px auto' }}>
+                <RadialTransform 
+                    defaultRadius={48} 
+                    toggle={ toggleCircle }
+                    rectWidth={500}
+                    rectHeight={500} />
+                </div>
                 <Button raised onClick={ () => this.setState({ toggleCircle: !toggleCircle }) }>{ toggleCircle.toString() }</Button>
             </div>
         )
