@@ -9,7 +9,7 @@ import ExitToAppIcon from 'material-ui-icons/ExitToApp'
 
 import CircleTransition from './CircleTransition'
 import FadeTransition from './FadeTransition'
-import RadialTransform from '../motions/RadialTransform'
+import FabToCardMotion from '../motions/FabToCardMotion'
 
 const css = {
     paper: { margin: '50px', padding: '15px', width: '100px', height: '100px' },
@@ -104,13 +104,15 @@ export default class CardMotion extends Component {
                     </FadeTransition>
                 </Paper>
 
-                <div style={{ width: '500px', height: '500px', margin: '30px auto' }}>
-                <RadialTransform 
-                    defaultRadius={48} 
+                <FabToCardMotion 
+                    defaultRadius={28}
+                    onClick={ () => this.setState({ toggleCircle: !toggleCircle }) }
                     toggle={ toggleCircle }
-                    rectWidth={500}
-                    rectHeight={500} />
-                </div>
+                    rectWidth={200}
+                    rectHeight={200}>
+                    <p>Paragraphe</p>
+                    <p>Oui oui</p>
+                </FabToCardMotion>
                 <Button raised onClick={ () => this.setState({ toggleCircle: !toggleCircle }) }>{ toggleCircle.toString() }</Button>
             </div>
         )

@@ -9,10 +9,9 @@ export default class FadeMotion extends Component {
             <Motion style={ { x: effect } }>
             { value => {
                 const opacity = value.x
-
                 return destroy && opacity > destroyThreshold ?
-                    <div style={{ opacity, width: '100%', height: '100%' }}>{ children }</div> :
-                    <div style={{ opacity, width: '100%', height: '100%' }}></div>
+                    <div style={{ opacity, width: '100%', height: '100%' }}></div> :
+                    <div style={{ opacity, width: '100%', height: '100%' }}>{ children }</div>
             } }
             </Motion>
         )
