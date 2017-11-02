@@ -12,7 +12,9 @@ import AddIcon from 'material-ui-icons/Add'
 import ModeEditIcon from 'material-ui-icons/ModeEdit'
 import DeleteIcon from 'material-ui-icons/Delete'
 
+import FabMotion from '../motions/FabMotion'
 import ProjectCard from './ProjectCard'
+import ProjectCardEdit from './ProjectCardEdit'
 import AddMotion from './AddMotion'
 
 const css = {
@@ -47,34 +49,14 @@ export default class Cards extends Component {
             newProject: {
                 name: '',
                 description: ''
-            }, 
-            addMotion: 0
-        }
-
-        const speed = 100
-        const addSize = this.getFunction(56, 260, speed)
-        const addOpacity = this.getFunction(1, 0, speed)
-        this.addMotion = { speed, size: addSize, opacity: addOpacity }
-
-        const createOpacity = this.getFunction(0, 1, speed)
-        this.createMotion = { speed, opacity: createOpacity }        
-    }
-
-    getFunction (start, end, speed) {
-        return { start, end, a: (end - start) / speed, b: start }
-    }
-
-    toggleAddMotion() {
-        const addMotion = this.state.addMotion === 0 ? this.addMotion.speed : 0
-        const { speed, size, opacity } = this.addMotion
-        this.addMotion.size = this.getFunction(size.start, size.end, speed)
-        this.addMotion.opacity = this.getFunction(opacity.start, opacity.end, speed)
-        this.setState({ addMotion })
+            },
+            toggleAdd: false
+        }      
     }
 
     render () {
         const { projects, onAdd, onDashboard, onUpdate, onDelete } = this.props
-        const { newProject } = this.state
+        const { newProject, toggleAdd } = this.state
         return (
             // <div style={{ display: 'flex', flexWrap: 'wrap' }}>
             <Grid container>
@@ -89,7 +71,16 @@ export default class Cards extends Component {
                     ))
                 }
                 <Grid item xs={12} sm={6} md={4} lg={3} xl={2}>
-                    <AddMotion onAdd={ onAdd } />
+                    <FabMotion
+                        defaultRadius={ 28 }
+                        fabColor='accent'
+                        toggle={ toggleAdd }
+                        onClick={ () => this.setState({ toggleAdd: true }) }>
+                        <ProjectCardEdit
+                            onClose={ () => this.setState({ toggleAdd: false }) }
+                            onSubmit={ project => { onAdd(project); this.setState({ toggleAdd: false }) } } />
+                    </FabMotion>
+                    {/* <AddMotion onAdd={ onAdd } /> */}
                 </Grid>
             </Grid>
         )

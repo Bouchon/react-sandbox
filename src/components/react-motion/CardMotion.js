@@ -9,7 +9,8 @@ import ExitToAppIcon from 'material-ui-icons/ExitToApp'
 
 import CircleTransition from './CircleTransition'
 import FadeTransition from './FadeTransition'
-import FabToCardMotion from '../motions/FabToCardMotion'
+import FabMotion from '../motions/FabMotion'
+import ClickMotion from '../motions/ClickMotion'
 
 const css = {
     paper: { margin: '50px', padding: '15px', width: '100px', height: '100px' },
@@ -66,6 +67,7 @@ export default class CardMotion extends Component {
         super()
         this.state = { 
             toggleCircle: false,
+            clickEvent: undefined,
             circleX: 0, circleY: 0
         }
     }
@@ -80,39 +82,53 @@ export default class CardMotion extends Component {
     }
 
     render () {
-        const { toggleCircle, circleX, circleY } = this.state
+        const { toggleCircle, clickEvent, circleX, circleY } = this.state
         const circleMotion = { size: { start: 0, end: 300 } }
 
         return (
             <div>
-                <Paper style={ css.paper } onClick={ (event) => this.onClickPaper(event) }>
-                    <FadeTransition toggle={ !toggleCircle } preset={ presets.gentle }>
-                        <p>Test</p>
-                        <IconButton onClick={ () => console.log('click') }>
-                            <ExitToAppIcon />
-                        </IconButton>   
-                    </FadeTransition>
-                    <CircleTransition 
-                        preset={ presets.stiff }
-                        color='pink'
-                        x={circleX} 
-                        y={circleY} 
-                        toggle={ toggleCircle } />
-                    <FadeTransition toggle={ toggleCircle }>
-                        <p>Yeah!!</p>
-                        <Button>Click me !</Button>  
-                    </FadeTransition>
-                </Paper>
+                <div style={{ display: 'flex' }}>
+                    <Paper style={ css.paper } onClick={ (event) => this.onClickPaper(event) }>
+                        <FadeTransition toggle={ !toggleCircle } preset={ presets.gentle }>
+                            <p>Test</p>
+                            <IconButton onClick={ () => console.log('click') }>
+                                <ExitToAppIcon />
+                            </IconButton>   
+                        </FadeTransition>
+                        <CircleTransition 
+                            preset={ presets.stiff }
+                            color='pink'
+                            x={circleX} 
+                            y={circleY} 
+                            toggle={ toggleCircle } />
+                        <FadeTransition toggle={ toggleCircle }>
+                            <p>Yeah!!</p>
+                            <Button>Click me !</Button>  
+                        </FadeTransition>
+                    </Paper>
+                    
+                    <div style={{ width: '150px', height: '150px', margin: '20px' }}>
+                        <FabMotion 
+                            defaultRadius={28}
+                            onClick={ () => this.setState({ toggleCircle: !toggleCircle }) }
+                            fabColor='accent'
+                            toggle={ toggleCircle }>
+                            <Paper style={{ width: '100%', height: '100%' }}>
+                                <Button color='primary' onClick={ () => this.setState({ toggleCircle: false }) }>close</Button>
+                            </Paper>
+                        </FabMotion>
+                    </div>
 
-                <FabToCardMotion 
-                    defaultRadius={28}
-                    onClick={ () => this.setState({ toggleCircle: !toggleCircle }) }
-                    toggle={ toggleCircle }
-                    rectWidth={200}
-                    rectHeight={200}>
-                    <p>Paragraphe</p>
-                    <p>Oui oui</p>
-                </FabToCardMotion>
+                    <Paper style={{ margin: '20px', width: '150px', height: '150px' }}
+                        onClick={ (event) => this.onClickPaper(event) }>
+                        <ClickMotion
+                            x={circleX} y={circleY}
+                            defaultRadius={ 0 }
+                            toggle={ toggleCircle }
+                            preset={ presets.wobbly }
+                            clickEvent={ clickEvent }></ClickMotion>
+                    </Paper>
+                </div>
                 <Button raised onClick={ () => this.setState({ toggleCircle: !toggleCircle }) }>{ toggleCircle.toString() }</Button>
             </div>
         )
