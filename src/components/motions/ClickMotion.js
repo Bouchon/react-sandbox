@@ -22,7 +22,7 @@ export default class ClickMotion extends Component {
         const opacity = toggle === true ? spring(0) : spring(1)
         return { circleR, opacity }
     }
-    getCircleStyle (radius, x, y, opacity) {
+    getCircleStyle (radius, x, y, opacity, color) {
         x = x + 'px'
         y = y + 'px'
         return {
@@ -33,12 +33,12 @@ export default class ClickMotion extends Component {
             borderRadius: '50%',
             left: 'calc(' + x + ' - ' + radius + 'px)',
             top: 'calc(' + y + ' - ' + radius + 'px)',
-            backgroundColor: 'pink'
+            backgroundColor: color,
         }
     }
 
     render () {
-        const { toggle, x, y, defaultRadius, preset, children } = this.props 
+        const { toggle, x, y, defaultRadius, preset, children, color } = this.props 
         const { parent } = this.state
         const parentBox = parent === undefined ? { width: 0, height: 0 } : parent.getBoundingClientRect()
         const finalRadius = this.getFinalRadius(x, y, parentBox.width, parentBox.height)
@@ -47,13 +47,14 @@ export default class ClickMotion extends Component {
         return (
             <Motion style={ motionStyle }>
             { value => {
-                const circleStyle = this.getCircleStyle(value.circleR, x, y, value.opacity)
-                const hideContent = circleStyle.opacity <= 0 && toggle === true
-
+                const circleStyle = this.getCircleStyle(value.circleR, x, y, value.opacity, color)
+                if (value.cirleR === defaultRadius) {
+                    circleStyle.opacity = 1
+                }
                 return (
-                    <div style={{ position: 'relative', width: '100%', height: '100%' }}>
-                        { hideContent === false ? children : undefined }
-                        { hideContent === false ? <div style={ circleStyle }></div> : undefined }
+                    <div style={{ position: 'relative', width: parentBox.width, height: parentBox.height, overflow: 'hidden' }}>
+                        { children }
+                        <div style={ circleStyle }></div>
                     </div>
                 )
             } }
