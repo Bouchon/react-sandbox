@@ -75,12 +75,12 @@ export default class ReactMotionScreen extends Component {
                             <Switch checked={ toggleFab }
                                 onChange={ () => this.setState({ toggleFab: !toggleFab })} />
                         </div>
-                        <div style={ css.bloc }>
+                        <div style={ { width: '100%'} }>
                             <FabMotion defaultRadius={ 28 }
                                 fabColor='accent'
                                 toggle={ toggleFab }
                                 onClick= { () => this.setState({ toggleFab: !toggleFab }) }>
-                                <Paper style={{ height: '120px', padding: '15px' }}>
+                                <Paper style={{ padding: '15px' }}>
                                     <Typography type='title'>Title</Typography>
                                     <Typography type='subheading'>Subheader</Typography>
                                     <Typography>Paragraph</Typography>
@@ -94,14 +94,14 @@ export default class ReactMotionScreen extends Component {
                             <Switch checked={ toggleClick }
                                 onChange={ () => this.setState({ toggleClick: !toggleClick })} />
                         </div>
-                        <Paper style={ css.bloc } onClick={ (event) => this.onClickPaper(event, 'toggleClick') }>
+                        <Paper style={{ width: '100%' }} onClick={ (event) => this.onClickPaper(event, 'toggleClick') }>
                             <ClickMotion
                                 color='#f50057'
                                 x={ circleX } 
                                 y={ circleY }
                                 defaultRadius={ 0 }
                                 toggle={ toggleClick }>
-                                <div style={{ height: '120px', padding: '15px' }}>
+                                <div style={{ padding: '15px' }}>
                                     <Typography type='title'>Title</Typography>
                                     <Typography type='subheading'>Subheader</Typography>
                                     <Typography>Paragraph</Typography>

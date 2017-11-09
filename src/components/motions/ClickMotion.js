@@ -38,7 +38,7 @@ export default class ClickMotion extends Component {
     }
 
     render () {
-        const { toggle, x, y, defaultRadius, preset, children, color } = this.props 
+        const { toggle, x, y, defaultRadius, preset, children, color, fade } = this.props 
         const { parent } = this.state
         const parentBox = parent === undefined ? { width: 0, height: 0 } : parent.getBoundingClientRect()
         const finalRadius = this.getFinalRadius(x, y, parentBox.width, parentBox.height)
@@ -47,12 +47,12 @@ export default class ClickMotion extends Component {
         return (
             <Motion style={ motionStyle }>
             { value => {
-                const circleStyle = this.getCircleStyle(value.circleR, x, y, value.opacity, color)
+                const circleStyle = this.getCircleStyle(value.circleR, x, y, fade ? value.opacity : 1, color)
                 if (value.cirleR === defaultRadius) {
                     circleStyle.opacity = 1
                 }
                 return (
-                    <div style={{ position: 'relative', width: parentBox.width, height: parentBox.height, overflow: 'hidden' }}>
+                    <div style={{ position: 'relative', overflow: 'hidden' }}>
                         { children }
                         <div style={ circleStyle }></div>
                     </div>

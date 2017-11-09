@@ -9,7 +9,10 @@ import IconButton from 'material-ui/IconButton'
 import ModeEditIcon from 'material-ui-icons/ModeEdit'
 import DeleteIcon from 'material-ui-icons/Delete'
 
+import ProjectCardEdit from './ProjectCardEdit'
+
 import ClickMotion from '../motions/ClickMotion'
+import SwitchFadeMotion from '../motions/SwitchFadeMotion'
 
 const css = {
     paper: {
@@ -47,7 +50,7 @@ export default class ProjectCard extends Component {
         this.state = {
             circleX: 0,
             circleY: 0,
-            toggleCircle: false
+            toggleEdit: false
         }
     }
     toggleEdit (event) {
@@ -55,7 +58,7 @@ export default class ProjectCard extends Component {
         const paperBox = ReactDOM.findDOMNode(this.paper).getBoundingClientRect()
         const editBox = event.currentTarget.getBoundingClientRect()
         this.setState({
-            toggleCircle: !this.state.toggleCircle,
+            toggleEdit: !this.state.toggleEdit,
             circleX: event.clientX - paperBox.x,
             circleY: event.clientY - paperBox.y
         })
@@ -63,15 +66,13 @@ export default class ProjectCard extends Component {
 
     render () {
         const { project, onDashboard, onEdit, onDelete } = this.props
-        const { circleX, circleY, toggleCircle } = this.state
-        return (
-            
+        const { circleX, circleY, toggleEdit } = this.state
+        const defaultPaper = (
             <Paper style={ css.paper } ref={(paper) => { this.paper = paper } }>
-                <ClickMotion 
-                    x={ circleX } y={ circleY }
-                    defaultRadius={0}
-                    toggle={ toggleCircle }
-                    preset={ presets.wobbly }>
+                <ClickMotion color='#f50057'
+                x={ circleX } y={ circleY }
+                defaultRadius={ 0 }
+                toggle={ toggleEdit }>
                     <div style={ css.titleContainer }>
                         <Typography style={ css.title } type='headline'><a href='#' onClick={ onDashboard }>{ project.name }</a></Typography>
                     </div>
@@ -87,6 +88,19 @@ export default class ProjectCard extends Component {
                     </div>
                 </ClickMotion>
             </Paper>
+        )
+        const editPaper = (
+            <ProjectCardEdit
+                onClose={ () => this.setState({ toggleEdit: false }) }
+                onSubmit={ project => { console.log('todo')} } />
+        )
+
+        return (
+            <SwitchFadeMotion toggle={ toggleEdit }
+                childrenA={ defaultPaper }
+                childrenB={ editPaper }>
+            
+            </SwitchFadeMotion>
         )
     }
 }

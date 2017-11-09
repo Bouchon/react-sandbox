@@ -45,7 +45,7 @@ export default class FabMotion extends Component {
         const width = parentStyle === undefined ? 0 : parentStyle.getPropertyValue('width')
         const height = parentStyle === undefined ? 0 : parentStyle.getPropertyValue('height')
         return { 
-            position: 'absolute', 
+            position: 'relative', 
             opacity, 
             width: 'calc(' + width + ' - ' + paddingLeft + ' - ' + paddingRight + ')', 
             height: 'calc(' + height + ' - ' + paddingLeft + ' - ' + paddingRight + ')',
@@ -84,7 +84,7 @@ export default class FabMotion extends Component {
                         {
                             hideCircle === true ? 
                                 undefined : (
-                                <div style={{ position: 'absolute', overflow: 'hidden', width: rectangleStyle.width, height: rectangleStyle.height }}>
+                                <div style={{ position: 'absolute', top: 0, overflow: 'hidden', width: rectangleStyle.width, height: rectangleStyle.height }}>
                                     <Button 
                                         fab 
                                         disableRipple

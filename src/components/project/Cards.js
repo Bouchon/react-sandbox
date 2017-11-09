@@ -80,7 +80,6 @@ export default class Cards extends Component {
                             onClose={ () => this.setState({ toggleAdd: false }) }
                             onSubmit={ project => { onAdd(project); this.setState({ toggleAdd: false }) } } />
                     </FabMotion>
-                    {/* <AddMotion onAdd={ onAdd } /> */}
                 </Grid>
             </Grid>
         )
