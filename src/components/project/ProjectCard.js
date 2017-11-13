@@ -67,37 +67,33 @@ export default class ProjectCard extends Component {
     render () {
         const { project, onDashboard, onEdit, onDelete } = this.props
         const { circleX, circleY, toggleEdit } = this.state
-        const defaultPaper = (
+        const projectPaper = (
             <Paper style={ css.paper } ref={(paper) => { this.paper = paper } }>
-                <ClickMotion color='#f50057'
-                x={ circleX } y={ circleY }
-                defaultRadius={ 0 }
-                toggle={ toggleEdit }>
-                    <div style={ css.titleContainer }>
-                        <Typography style={ css.title } type='headline'><a href='#' onClick={ onDashboard }>{ project.name }</a></Typography>
-                    </div>
-                    <div style={ css.content }>
-                        <Typography>{ project.description }</Typography>
-                        <Typography type='caption'>Tasks (0)</Typography>
-                        <Typography type='caption'>Documents (0)</Typography>
-                        <Typography type='caption'>Members (0)</Typography>
-                    </div>
-                    <div style={ css.footer }>
-                        <IconButton onClick={ onDelete }><DeleteIcon /></IconButton>
-                        <IconButton onClick={ (event) => this.toggleEdit(event) }><ModeEditIcon /></IconButton>
-                    </div>
-                </ClickMotion>
+                <div style={ css.titleContainer }>
+                    <Typography style={ css.title } type='headline'><a href='#' onClick={ onDashboard }>{ project.name }</a></Typography>
+                </div>
+                <div style={ css.content }>
+                    <Typography>{ project.description }</Typography>
+                    <Typography type='caption'>Tasks (0)</Typography>
+                    <Typography type='caption'>Documents (0)</Typography>
+                    <Typography type='caption'>Members (0)</Typography>
+                </div>
+                <div style={ css.footer }>
+                    <IconButton onClick={ onDelete }><DeleteIcon /></IconButton>
+                    <IconButton onClick={ (event) => this.toggleEdit(event) }><ModeEditIcon /></IconButton>
+                </div>
             </Paper>
         )
         const editPaper = (
             <ProjectCardEdit
+                project={ project }
                 onClose={ () => this.setState({ toggleEdit: false }) }
-                onSubmit={ project => { console.log('todo')} } />
+                onSubmit={ project => { onEdit(project); this.setState({ toggleEdit: false }) } } />
         )
 
         return (
             <SwitchFadeMotion toggle={ toggleEdit }
-                childrenA={ defaultPaper }
+                childrenA={ projectPaper }
                 childrenB={ editPaper }>
             
             </SwitchFadeMotion>

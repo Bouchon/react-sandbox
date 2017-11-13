@@ -42,7 +42,7 @@ class ListScreen extends Component {
             { name: 'Projects' }
         ]
 
-        const { projects, addProject, deleteProject } = this.props
+        const { projects, addProject, deleteProject, updateProject } = this.props
         return (
             <div>
                 <Hero breadCrumb={ breadCrumb } />
@@ -51,7 +51,7 @@ class ListScreen extends Component {
                     <Cards 
                         projects={ projects }
                         onAdd={ project => addProject(project) }
-                        onUpdate={ id => this.setState({ onUpdate: true, projectId: id }) }
+                        onUpdate={ project => updateProject(project) }
                         onDelete={ id => { this.setState({ dialogOpen: true, projectId: id }) } }
                         onDashboard={ id => this.setState({ onDashboard: true, projectId: id })} />
                 }
@@ -71,4 +71,4 @@ class ListScreen extends Component {
 }
 
 const mapStateToProps = ({ projects }) => ({ projects })
-export default connect(mapStateToProps, { addProject, deleteProject })(ListScreen)
+export default connect(mapStateToProps, { addProject, deleteProject, updateProject })(ListScreen)

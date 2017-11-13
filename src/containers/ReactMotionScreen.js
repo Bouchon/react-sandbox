@@ -11,6 +11,7 @@ import FadeMotion from '../components/motions/FadeMotion'
 import FabMotion from '../components/motions/FabMotion'
 import ClickMotion from '../components/motions/ClickMotion'
 import SwitchFadeMotion from '../components/motions/SwitchFadeMotion'
+import MorphMotion from '../components/motions/MorphMotion'
 
 import TransitionGroup from '../components/react-motion/TransitionGroup'
 import Staggered from '../components/react-motion/Staggered'
@@ -29,7 +30,8 @@ export default class ReactMotionScreen extends Component {
             toggleFab: false,
             toggleClick: false,
             toggleSwitch: false,
-            toggleClickFade: false
+            toggleClickFade: false,
+            toggleMorph: false
         }
     }
 
@@ -48,7 +50,7 @@ export default class ReactMotionScreen extends Component {
     }
 
     render () {
-        const { toggle, fadeValue, toggleFab, toggleClick, circleX, circleY, toggleSwitch, toggleClickFade } = this.state 
+        const { toggle, fadeValue, toggleFab, toggleClick, circleX, circleY, toggleSwitch, toggleMorph, toggleClickFade } = this.state 
         return (
             <div style={{ padding: '15px' }}>
                 <Grid container>
@@ -133,6 +135,21 @@ export default class ReactMotionScreen extends Component {
                             )}>
                              
                         </SwitchFadeMotion>
+                    </Grid>
+                    <Grid item xs={3}>
+                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                            <Typography>Morph Motion</Typography>
+                            <Switch checked={ toggleMorph }
+                                onChange={ () => this.setState({ toggleMorph: !toggleMorph })} />
+                        </div>
+                        <Paper style={{ width: '100%', height: '200px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                            <MorphMotion toggle={ toggleMorph }
+                                childrenA={( <p>+</p> )}
+                                childrenB={( <p>-</p> )}
+                                paramsA={{ width: 48, height: 48, borderRadius: 24 }}
+                                paramsB={{ width: 100, height: 100, borderRadius: 0 }}
+                                preset={ presets.wobbly } />
+                        </Paper>
                     </Grid>
                 </Grid>
                 

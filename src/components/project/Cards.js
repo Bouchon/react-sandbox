@@ -65,7 +65,7 @@ export default class Cards extends Component {
                             <ProjectCard
                                 project={ project }
                                 onDashboard={ () => onDashboard(project.id) }
-                                onEdit={ () => onUpdate(project.id) }
+                                onEdit={ project => onUpdate(project) }
                                 onDelete={ () => onDelete(project.id) } />
                         </Grid>
                     ))

@@ -14,11 +14,11 @@ export default class SwitchFadeMotion extends Component {
     getMotionStyle (toggle, preset) {
         let opacityA, opacityB
         if (preset === undefined) {
-            opacityA = toggle ? spring(1) : spring(0)
-            opacityB = toggle ? spring(0) : spring(1)
+            opacityA = toggle ? spring(0) : spring(1)
+            opacityB = toggle ? spring(1) : spring(0)
         } else {
-            opacityA = toggle ? spring(1, preset) : spring(0, preset)
-            opacityB = toggle ? spring(0, preset) : spring(1, preset)
+            opacityA = toggle ? spring(0, preset) : spring(1, preset)
+            opacityB = toggle ? spring(1, preset) : spring(0, preset)
         }
         return { opacityA, opacityB }
     }
@@ -33,14 +33,20 @@ export default class SwitchFadeMotion extends Component {
             <Motion style={ motionStyle }>
             { value => {
                 const { opacityA, opacityB } = value
+                const a = toggle && opacityA <= 0 ? undefined : (
+                    <div style={{ position: 'absolute', width: '100%', height: '100%', opacity: opacityA }}>
+                        { childrenA }
+                    </div>
+                )
+                const b = !toggle && opacityB <= 0 ? undefined : (
+                    <div style={{ position: 'absolute', width: '100%', height: '100%', opacity: opacityB }}>
+                        { childrenB }
+                    </div>
+                )
                 return (
                     <div style={{ position: 'relative', width: '100%', height: '100%' }}>
-                        <div style={{ position: 'absolute', width: '100%', height: '100%', opacity: opacityA }}>
-                            { childrenA }
-                        </div>
-                        <div style={{ position: 'absolute', width: '100%', height: '100%', opacity: opacityB }}>
-                            { childrenB }
-                        </div>
+                        { toggle ? a : b }
+                        { toggle ? b : a }                        
                     </div>
                 )
             } }
