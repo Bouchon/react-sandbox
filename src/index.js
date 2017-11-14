@@ -6,10 +6,10 @@ import configureStore from './store'
 import App from './App'
 
 async function renderApp (RootComponent) {
-    const store = await configureStore()
+    //const store = await configureStore()
     render(
         <AppContainer>
-            <RootComponent store={store} />
+            <RootComponent store={configureStore()} />
         </AppContainer>,
         document.getElementById('app')
     )
@@ -18,9 +18,5 @@ async function renderApp (RootComponent) {
 renderApp(App)
 
 if (module.hot) {
-    module.hot.accept('./App', () => {
-        const NextApp = require('./App').default
-        renderApp(NextApp)
-    })
-    module.hot.accept()
+    module.hot.accept('./App', () => console.log('Accepting the updated printMe module!')) //render(App))
 }

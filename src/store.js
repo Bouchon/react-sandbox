@@ -1,6 +1,6 @@
 import { compose, applyMiddleware, createStore } from 'redux'
 import localForage from 'localforage'
-import { getStoredState, persistStore, autoRehydrate, createPersistor } from 'redux-persist'
+import { REHYDRATE, PURGE, persistCombineReducers, getStoredState, persistStore, createPersistor } from 'redux-persist'
 
 import rootReducer from './reducers/root'
 
@@ -19,25 +19,30 @@ const DEFAULT_STATE = {
 }
 
 export default function configureStore() {
-    return new Promise((resolve, reject) => {
-        try {
-            const enhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
-            const store = createStore(
-                rootReducer, 
-                undefined,
-                enhancer(applyMiddleware(), autoRehydrate()))
+    const enhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+    const config = { key: 'primary', storage: localForage }
+    const reducer = persistCombineReducers(config, rootReducer)
+    console.log(reducer)
+    const store = createStore(reducer, undefined, enhancer(applyMiddleware()))
+    persistStore(store, null, () => store.getState())
+    return store
+    // return new Promise((resolve, reject) => {
+    //     try {
+    //         const enhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+    //         const store = createStore(
+    //             rootReducer, 
+    //             undefined,
+    //             enhancer(applyMiddleware()))
 
-            persistStore(
-                store, 
-                {
-                    whitelist: ['login', 'projects', 'tasks'], 
-                    storage: localForage
-                },
-                () => resolve(store))
-        } catch (ex) {
-            reject(ex)
-        }
-    })
+    //         console.log(store)
+    //         persistStore(
+    //             store,
+    //             null, 
+    //             () => store.getState())
+    //     } catch (ex) {
+    //         reject(ex)
+    //     }
+    // })
 }
 
 /*const persistConfig = {

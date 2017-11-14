@@ -8,7 +8,7 @@ import Paper from 'material-ui/Paper'
 import Button from 'material-ui/Button'
 import { indigo } from 'material-ui/colors'
 
-import { addProject, deleteProject } from '../../action-creators/projects'
+import { addProject, deleteProject, updateProject } from '../../action-creators/projects'
 import AlertDialog from '../../components/common/AlertDialog'
 import List from '../../components/project/List'
 import Cards from '../../components/project/Cards'
